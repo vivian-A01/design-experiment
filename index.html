@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ABConvert - Revenue Impact Calculator</title>
+
+  <!-- Shopify Polaris Web Components -->
+  <script src="https://cdn.shopify.com/shopifycloud/polaris.js"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Main Calculator Section -->
+  <section class="calculator-section">
+    <div class="calculator-container">
+
+      <!-- Section Header -->
+      <div class="section-header">
+        <h1 class="heading-xl">Calculate Your Potential Revenue Lift</h1>
+        <p class="body-lg text-subdued">
+          See how much revenue you could gain by optimizing your store with A/B testing.
+          Use your actual metrics below.
+        </p>
+      </div>
+
+      <!-- Calculator Card -->
+      <s-card>
+        <div class="card-content">
+
+          <!-- Calculator Title -->
+          <div class="calculator-title">
+            <h2 class="heading-lg">💡 See Your Potential Revenue Lift</h2>
+          </div>
+
+          <!-- Input Fields -->
+          <div class="input-grid">
+            <s-number-field
+              label="Monthly Visitors"
+              value="50000"
+              id="visitors"
+              min="1000"
+              step="1000"
+              help-text="Total monthly store visitors"
+            ></s-number-field>
+
+            <s-number-field
+              label="Conversion Rate (%)"
+              value="2.5"
+              id="conversion-rate"
+              min="0.1"
+              max="20"
+              step="0.1"
+              help-text="Current checkout conversion"
+            ></s-number-field>
+
+            <s-number-field
+              label="Average Order Value ($)"
+              value="75"
+              id="aov"
+              min="1"
+              step="1"
+              help-text="Average transaction amount"
+            ></s-number-field>
+          </div>
+
+          <!-- Improvement Slider -->
+          <div class="slider-section">
+            <label for="improvement" class="slider-label">
+              Expected Improvement:
+            </label>
+            <div class="slider-container">
+              <input
+                type="range"
+                id="improvement"
+                min="5"
+                max="50"
+                value="15"
+                step="1"
+                aria-label="Expected improvement percentage"
+                aria-valuemin="5"
+                aria-valuemax="50"
+                aria-valuenow="15"
+              >
+              <span id="improvement-label" class="slider-value">15%</span>
+            </div>
+            <p class="slider-hint">Most merchants see 10-20% lift in their first test</p>
+          </div>
+
+          <!-- Divider -->
+          <div class="divider"></div>
+
+          <!-- Results Comparison -->
+          <div class="results-grid">
+            <!-- Current State -->
+            <s-box padding="400" class="result-card current-card">
+              <div class="result-content">
+                <p class="result-label">CURRENT</p>
+                <h3 class="result-value" id="current-revenue">$93,750/mo</h3>
+                <p class="result-description">Based on your metrics</p>
+              </div>
+            </s-box>
+
+            <!-- Arrow -->
+            <div class="arrow-container">
+              <span class="arrow">→</span>
+            </div>
+
+            <!-- With ABConvert -->
+            <s-box padding="400" class="result-card projected-card">
+              <div class="result-content">
+                <p class="result-label">WITH ABCONVERT</p>
+                <h3 class="result-value projected" id="projected-revenue">$107,812/mo</h3>
+                <div class="result-badges">
+                  <s-badge tone="success" id="lift-badge">+$14,062/mo</s-badge>
+                  <span class="lift-percent" id="lift-percent">+15% lift</span>
+                </div>
+              </div>
+            </s-box>
+          </div>
+
+          <!-- Annual Impact Banner -->
+          <s-banner tone="info" class="annual-banner">
+            <div class="annual-content">
+              <span class="annual-label">Annual Impact:</span>
+              <strong class="annual-value" id="annual-impact">+$168,750</strong>
+            </div>
+          </s-banner>
+
+          <!-- CTA Button -->
+          <s-button
+            variant="primary"
+            size="large"
+            class="cta-button"
+            onclick="window.location.href='/signup'"
+          >
+            Start Free Trial →
+          </s-button>
+
+          <!-- Trust Signal -->
+          <p class="trust-signal">
+            No credit card required • 14-day free trial
+          </p>
+
+        </div>
+      </s-card>
+
+      <!-- Bottom Trust Signal -->
+      <p class="bottom-trust-signal">
+        Based on average results from 500+ Shopify merchants
+      </p>
+
+    </div>
+  </section>
+
+  <!-- Calculator JavaScript -->
+  <script src="calculator.js"></script>
+</body>
+</html>
