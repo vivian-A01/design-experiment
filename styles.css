@@ -1,0 +1,582 @@
+/**
+ * ABConvert Revenue Calculator Styles
+ *
+ * Uses Shopify Polaris design tokens for consistency
+ * Desktop-first, mobile-friendly responsive design
+ */
+
+/* ============================================
+   POLARIS DESIGN TOKENS
+   ============================================ */
+
+:root {
+  /* Spacing tokens */
+  --p-space-100: 4px;
+  --p-space-150: 6px;
+  --p-space-200: 8px;
+  --p-space-300: 12px;
+  --p-space-400: 16px;
+  --p-space-500: 20px;
+  --p-space-600: 24px;
+  --p-space-800: 32px;
+  --p-space-1000: 40px;
+  --p-space-1200: 48px;
+
+  /* Colors */
+  --p-color-text-primary: #202223;
+  --p-color-text-subdued: #6d7175;
+  --p-color-text-brand: #2c6ecb;
+  --p-color-bg-surface: #ffffff;
+  --p-color-bg-fill: #f1f2f4;
+  --p-color-bg-fill-success: #aee9d1;
+  --p-color-bg-fill-success-secondary: #e4f8f0;
+  --p-color-bg-fill-brand: #2c6ecb;
+  --p-color-border: #c9cccf;
+  --p-color-border-focus: #2c6ecb;
+
+  /* Typography */
+  --p-font-size-75: 12px;
+  --p-font-size-100: 14px;
+  --p-font-size-200: 16px;
+  --p-font-size-300: 20px;
+  --p-font-size-400: 24px;
+  --p-font-size-500: 28px;
+  --p-font-size-600: 32px;
+
+  /* Shadows */
+  --p-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --p-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --p-shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
+
+  /* Border radius */
+  --p-border-radius-base: 8px;
+  --p-border-radius-lg: 12px;
+
+  /* Transitions */
+  --p-transition-fast: 150ms ease-in-out;
+  --p-transition-base: 250ms ease-in-out;
+}
+
+/* ============================================
+   GLOBAL STYLES
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: var(--p-font-size-100);
+  line-height: 1.6;
+  color: var(--p-color-text-primary);
+  background-color: #f6f6f7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+
+.heading-xl {
+  font-size: var(--p-font-size-600);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 var(--p-space-300) 0;
+  color: var(--p-color-text-primary);
+}
+
+.heading-lg {
+  font-size: var(--p-font-size-400);
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 0;
+  color: var(--p-color-text-primary);
+}
+
+.body-lg {
+  font-size: var(--p-font-size-200);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.text-subdued {
+  color: var(--p-color-text-subdued);
+}
+
+/* ============================================
+   CALCULATOR SECTION
+   ============================================ */
+
+.calculator-section {
+  padding: var(--p-space-1200) var(--p-space-400);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.calculator-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: var(--p-space-800);
+}
+
+.section-header .heading-xl {
+  margin-bottom: var(--p-space-400);
+}
+
+.section-header .body-lg {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   CARD CONTENT
+   ============================================ */
+
+.card-content {
+  padding: var(--p-space-600);
+}
+
+.calculator-title {
+  margin-bottom: var(--p-space-600);
+}
+
+/* ============================================
+   INPUT FIELDS
+   ============================================ */
+
+.input-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--p-space-400);
+  margin-bottom: var(--p-space-600);
+}
+
+/* Ensure Polaris number fields fill their containers */
+s-number-field {
+  width: 100%;
+}
+
+/* ============================================
+   SLIDER SECTION
+   ============================================ */
+
+.slider-section {
+  margin-bottom: var(--p-space-600);
+}
+
+.slider-label {
+  display: block;
+  font-size: var(--p-font-size-100);
+  font-weight: 500;
+  color: var(--p-color-text-primary);
+  margin-bottom: var(--p-space-300);
+}
+
+.slider-container {
+  display: flex;
+  align-items: center;
+  gap: var(--p-space-400);
+  margin-bottom: var(--p-space-200);
+}
+
+.slider-container input[type="range"] {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--p-color-bg-fill);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+/* Webkit browsers (Chrome, Safari, Edge) */
+.slider-container input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--p-color-bg-fill-brand);
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform var(--p-transition-fast);
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb:active {
+  transform: scale(0.95);
+}
+
+/* Firefox */
+.slider-container input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: none;
+  border-radius: 50%;
+  background: var(--p-color-bg-fill-brand);
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform var(--p-transition-fast);
+}
+
+.slider-container input[type="range"]::-moz-range-thumb:hover {
+  transform: scale(1.1);
+}
+
+.slider-container input[type="range"]::-moz-range-thumb:active {
+  transform: scale(0.95);
+}
+
+/* Focus state for accessibility */
+.slider-container input[type="range"]:focus {
+  outline: 2px solid var(--p-color-border-focus);
+  outline-offset: 2px;
+}
+
+.slider-container input[type="range"]:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.slider-value {
+  font-weight: 600;
+  font-size: var(--p-font-size-300);
+  min-width: 55px;
+  text-align: right;
+  color: var(--p-color-text-brand);
+  font-variant-numeric: tabular-nums;
+}
+
+.slider-hint {
+  font-size: var(--p-font-size-75);
+  color: var(--p-color-text-subdued);
+  margin: 0;
+  font-style: italic;
+}
+
+/* ============================================
+   DIVIDER
+   ============================================ */
+
+.divider {
+  height: 1px;
+  background-color: var(--p-color-border);
+  margin: var(--p-space-600) 0;
+}
+
+/* ============================================
+   RESULTS GRID
+   ============================================ */
+
+.results-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: var(--p-space-400);
+  align-items: center;
+  margin-bottom: var(--p-space-600);
+}
+
+.result-card {
+  border-radius: var(--p-border-radius-lg);
+  border: 1px solid var(--p-color-border);
+  transition: transform var(--p-transition-fast);
+}
+
+.current-card {
+  background-color: var(--p-color-bg-surface);
+}
+
+.projected-card {
+  background-color: var(--p-color-bg-fill-success-secondary);
+  border-color: var(--p-color-bg-fill-success);
+}
+
+.result-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--p-space-200);
+}
+
+.result-label {
+  font-size: var(--p-font-size-75);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--p-color-text-subdued);
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.result-value {
+  font-size: var(--p-font-size-500);
+  font-weight: 700;
+  margin: 0;
+  color: var(--p-color-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.result-value.projected {
+  color: #008060;
+}
+
+.result-description {
+  font-size: var(--p-font-size-75);
+  color: var(--p-color-text-subdued);
+  margin: 0;
+}
+
+.result-badges {
+  display: flex;
+  align-items: center;
+  gap: var(--p-space-200);
+  flex-wrap: wrap;
+}
+
+.lift-percent {
+  font-size: var(--p-font-size-75);
+  font-weight: 500;
+  color: var(--p-color-text-primary);
+}
+
+/* Arrow */
+.arrow-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow {
+  font-size: 2rem;
+  color: var(--p-color-text-subdued);
+}
+
+/* ============================================
+   ANNUAL BANNER
+   ============================================ */
+
+.annual-banner {
+  margin-bottom: var(--p-space-600);
+}
+
+.annual-content {
+  display: flex;
+  align-items: center;
+  gap: var(--p-space-300);
+  font-size: var(--p-font-size-200);
+}
+
+.annual-label {
+  font-weight: 500;
+  color: var(--p-color-text-primary);
+}
+
+.annual-value {
+  font-size: var(--p-font-size-400);
+  font-weight: 700;
+  color: var(--p-color-text-brand);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================
+   CTA BUTTON
+   ============================================ */
+
+.cta-button {
+  width: 100%;
+  margin-bottom: var(--p-space-400);
+}
+
+/* ============================================
+   TRUST SIGNALS
+   ============================================ */
+
+.trust-signal {
+  text-align: center;
+  font-size: var(--p-font-size-75);
+  color: var(--p-color-text-subdued);
+  margin: 0;
+}
+
+.bottom-trust-signal {
+  text-align: center;
+  font-size: var(--p-font-size-75);
+  color: var(--p-color-text-subdued);
+  margin-top: var(--p-space-600);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.value-update {
+  animation: pulse 0.3s ease-in-out;
+}
+
+/* Smooth transitions for value changes */
+.result-value,
+.annual-value,
+.slider-value {
+  transition: color var(--p-transition-base);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .calculator-section {
+    padding: var(--p-space-800) var(--p-space-400);
+  }
+
+  .section-header .heading-xl {
+    font-size: var(--p-font-size-500);
+  }
+
+  .input-grid {
+    grid-template-columns: 1fr;
+    gap: var(--p-space-300);
+  }
+
+  .results-grid {
+    grid-template-columns: 1fr;
+    gap: var(--p-space-400);
+  }
+
+  .arrow-container {
+    display: none;
+  }
+
+  .result-value {
+    font-size: var(--p-font-size-400);
+  }
+
+  .annual-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--p-space-200);
+  }
+
+  .card-content {
+    padding: var(--p-space-400);
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .calculator-section {
+    padding: var(--p-space-600) var(--p-space-300);
+  }
+
+  .section-header .heading-xl {
+    font-size: var(--p-font-size-400);
+  }
+
+  .section-header .body-lg {
+    font-size: var(--p-font-size-100);
+  }
+
+  .calculator-title .heading-lg {
+    font-size: var(--p-font-size-300);
+  }
+
+  .card-content {
+    padding: var(--p-space-300);
+  }
+
+  .slider-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .slider-value {
+    text-align: left;
+    font-size: var(--p-font-size-200);
+  }
+
+  .result-value {
+    font-size: var(--p-font-size-300);
+  }
+
+  .annual-value {
+    font-size: var(--p-font-size-300);
+  }
+
+  .result-badges {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .result-card {
+    border-width: 2px;
+  }
+
+  .slider-container input[type="range"]:focus {
+    outline-width: 3px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus visible for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid var(--p-color-border-focus);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  body {
+    background-color: white;
+  }
+
+  .calculator-section {
+    padding: 0;
+  }
+
+  .cta-button {
+    display: none;
+  }
+
+  .result-card {
+    border: 1px solid #000;
+  }
+}
