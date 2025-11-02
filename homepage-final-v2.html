@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ABConvert - Streamlined A/B Testing for Shopify Brands</title>
+
+  <!-- Google Fonts: Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       DESIGN SYSTEM TOKENS (CSS Custom Properties) - UPDATED V2
+       ============================================================ */
+    :root {
+      /* Colors - Primary Blue */
+      --color-blue-01: #217BD1;
+      --color-blue-02: #3FB4E8;
+      --color-primary-400: #3FB4E8;
+      --color-primary-500: #217BD1;
+
+      /* Colors - Accent Lime/Green */
+      --color-accent-primary: #ACFF19;  /* Updated primary CTA color */
+      --color-accent-400: #ACFF17;
+      --color-accent-300: #DFFF33;
+      --color-highlight: #5A912B;  /* Neon highlight color */
+
+      /* Colors - Neutrals */
+      --color-neutral-0: #FFFFFF;
+      --color-neutral-dark: #191919;  /* Menu button background */
+      --color-black: #000000;
+
+      /* Text Colors */
+      --color-text-primary: #FFFFFF;
+      --color-text-secondary: #ADB5BD;
+      --color-text-inverse: #000000;
+
+      /* Typography - Responsive */
+      --font-family-primary: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+
+      --font-size-xs: clamp(0.7rem, 0.65rem + 0.25vw, 0.75rem);
+      --font-size-sm: clamp(0.8rem, 0.75rem + 0.25vw, 0.875rem);
+      --font-size-base: clamp(0.9rem, 0.85rem + 0.25vw, 1rem);
+      --font-size-lg: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --font-size-xl: clamp(1.1rem, 1rem + 0.5vw, 1.25rem);
+      --font-size-2xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+      --font-size-3xl: clamp(1.5rem, 1.3rem + 1vw, 1.875rem);
+      --font-size-4xl: clamp(1.75rem, 1.5rem + 1.25vw, 2.25rem);
+      --font-size-5xl: clamp(2rem, 1.75rem + 1.5vw, 3rem);
+      --font-size-6xl: clamp(2.5rem, 2rem + 2.5vw, 3.75rem);
+
+      --font-weight-light: 300;
+      --font-weight-regular: 400;
+      --font-weight-medium: 500;
+      --font-weight-bold: 700;
+      --font-weight-black: 900;
+
+      --line-height-tight: 1.2;
+      --line-height-normal: 1.5;
+      --line-height-relaxed: 1.75;
+
+      /* Spacing - Fluid */
+      --space-1: clamp(0.2rem, 0.15rem + 0.25vw, 0.25rem);
+      --space-2: clamp(0.4rem, 0.35rem + 0.25vw, 0.5rem);
+      --space-3: clamp(0.6rem, 0.5rem + 0.5vw, 0.75rem);
+      --space-4: clamp(0.8rem, 0.7rem + 0.5vw, 1rem);
+      --space-6: clamp(1.2rem, 1rem + 1vw, 1.5rem);
+      --space-8: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);
+      --space-10: clamp(1.75rem, 1.5rem + 1.25vw, 2.5rem);
+      --space-12: clamp(2rem, 1.75rem + 1.25vw, 3rem);
+      --space-16: clamp(2.5rem, 2rem + 2vw, 4rem);
+      --space-20: clamp(3rem, 2.5rem + 2.5vw, 5rem);
+      --space-24: clamp(3.5rem, 3rem + 2.5vw, 6rem);
+      --space-32: clamp(4rem, 3.5rem + 2.5vw, 8rem);
+
+      /* Border Radius - UPDATED TO PILL STYLE */
+      --radius-button: 8rem;  /* Standard button radius - pill style (fully rounded) */
+      --radius-sm: 0.25rem;
+      --radius-base: 0.5rem;
+      --radius-md: 0.75rem;
+      --radius-lg: 1rem;
+      --radius-xl: 1.5rem;
+      --radius-pill: 8rem;  /* Pill-style buttons (fully rounded) */
+
+      /* Shadows */
+      --shadow-md: 0 8px 16px 0 rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 16px 32px 0 rgba(0, 0, 0, 0.6);
+      --shadow-xl: 0 24px 48px 0 rgba(0, 0, 0, 0.7);
+
+      /* Glow Effects */
+      --glow-accent: 0 0 20px rgba(172, 255, 23, 0.6);
+      --glow-highlight: 0 0 15px rgba(90, 145, 43, 0.8);
+
+      /* Transitions */
+      --transition-fast: 150ms;
+      --transition-base: 200ms;
+      --transition-slow: 300ms;
+
+      /* Container Widths - Responsive */
+      --container-max: 1400px;
+      --container-padding: clamp(1rem, 5vw, 310px);
+    }
+
+    /* ============================================================
+       RESET & BASE STYLES
+       ============================================================ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    *:focus {
+      outline: none !important;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-family-primary);
+      background: var(--color-black);
+      color: var(--color-text-primary);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-normal);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      outline: none;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      height: auto;
+    }
+
+    /* ============================================================
+       UTILITY CLASSES
+       ============================================================ */
+    .container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding-left: var(--container-padding);
+      padding-right: var(--container-padding);
+      width: 100%;
+    }
+
+    /* Mobile-first responsive container */
+    @media (min-width: 768px) {
+      .container {
+        padding-left: clamp(2rem, 8vw, 310px);
+        padding-right: clamp(2rem, 8vw, 310px);
+      }
+    }
+
+    /* ============================================================
+       GLOBAL BUTTON STYLES - UPDATED TO PILL STYLE (8rem radius)
+       ============================================================ */
+    .btn,
+    button {
+      display: flex;
+      flex-flow: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 0.75rem 1rem;
+      border-radius: 8rem;
+      font-weight: var(--font-weight-medium);
+      font-size: var(--font-size-base);
+      transition: all var(--transition-base) ease;
+      cursor: pointer;
+      border: none;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--color-accent-primary);
+      color: var(--color-text-inverse);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-accent-300);
+      transform: translate3d(0, -2px, 0) scale3d(1.02, 1.02, 1);
+      box-shadow: var(--glow-accent);
+    }
+
+    .btn-secondary {
+      background: var(--color-neutral-0);
+      color: var(--color-text-inverse);
+    }
+
+    .btn-secondary:hover {
+      background: #F5F5F5;
+      transform: translate3d(0, -2px, 0) scale3d(1.02, 1.02, 1);
+    }
+
+    .btn-dark {
+      background: var(--color-neutral-dark);
+      color: var(--color-text-primary);
+    }
+
+    .btn-dark:hover {
+      background: #2A2A2A;
+      transform: translate3d(0, -1px, 0) scale3d(1.02, 1.02, 1);
+    }
+
+    .btn-large {
+      padding: 0.75rem 1rem;
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    /* ============================================================
+       NAVIGATION - FULL WIDTH, RESPONSIVE
+       ============================================================ */
+    .navbar {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: var(--space-4) 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      width: 100vw;
+      margin-left: calc(-1 * var(--container-padding));
+      padding-left: var(--container-padding);
+      padding-right: var(--container-padding);
+    }
+
+    .navbar-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-8);
+      max-width: var(--container-max);
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      flex-shrink: 0;
+    }
+
+    .navbar-logo {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .navbar-menu {
+      display: none;
+      gap: var(--space-8);
+      align-items: center;
+      flex: 1;
+      justify-content: center;
+    }
+
+    @media (min-width: 768px) {
+      .navbar-menu {
+        display: flex;
+      }
+    }
+
+    .navbar-link {
+      color: var(--color-text-primary);
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-medium);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-base);
+      transition: all var(--transition-base) ease;
+      position: relative;
+    }
+
+    .navbar-link:hover,
+    .navbar-link.active {
+      color: var(--color-text-primary);
+      background: transparent;
+    }
+
+    /* Dropdown - Nested Structure */
+    .navbar-dropdown {
+      position: relative;
+    }
+
+    .dropdown-trigger {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      background: none;
+    }
+
+    .dropdown-trigger::after {
+      content: '▾';
+      font-size: var(--font-size-xs);
+      transition: transform var(--transition-base) ease;
+    }
+
+    .navbar-dropdown:hover .dropdown-trigger::after {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + var(--space-2));
+      left: 0;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      border-radius: var(--radius-base);
+      padding: var(--space-2);
+      min-width: 150px;
+      box-shadow: var(--shadow-lg);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all var(--transition-base) ease;
+    }
+
+    .navbar-dropdown:hover .dropdown-menu,
+    .navbar-dropdown:focus-within .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-item {
+      display: block;
+      padding: var(--space-2) var(--space-3);
+      color: var(--color-text-primary);
+      border-radius: var(--radius-base);
+      transition: all var(--transition-base) ease;
+    }
+
+    .dropdown-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar-cta {
+      flex-shrink: 0;
+    }
+
+    .shopify-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+      display: block;
+      background: transparent;
+      color: var(--color-text-primary);
+      font-size: var(--font-size-2xl);
+      padding: var(--space-2);
+    }
+
+    @media (min-width: 768px) {
+      .mobile-menu-toggle {
+        display: none;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .navbar-menu {
+        position: fixed;
+        top: 73px;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(12px);
+        flex-direction: column;
+        padding: var(--space-6);
+        gap: var(--space-4);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all var(--transition-slow) ease;
+        width: 100vw;
+      }
+
+      .navbar-menu.active {
+        display: flex;
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .dropdown-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        margin-top: var(--space-2);
+      }
+    }
+
+    /* ============================================================
+       HERO SECTION - RESPONSIVE
+       ============================================================ */
+    .hero {
+      padding: var(--space-24) 0 var(--space-16);
+      position: relative;
+      width: 100%;
+    }
+
+    .hero-content {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto var(--space-12);
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: rgba(255, 255, 255, 0.1);
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-pill);
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--space-6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .shopify-logo {
+      height: 20px;
+      width: auto;
+    }
+
+    .hero-headline {
+      font-size: var(--font-size-6xl);
+      font-weight: var(--font-weight-bold);
+      line-height: var(--line-height-tight);
+      letter-spacing: -0.02em;
+      margin-bottom: var(--space-6);
+      color: var(--color-text-primary);
+    }
+
+    /* NEON HIGHLIGHT ANIMATION - SWEEPING GREEN HIGHLIGHTER */
+    .highlight {
+      position: relative;
+      display: inline-block;
+      z-index: 1;
+    }
+
+    .highlight::before {
+      content: '';
+      position: absolute;
+      bottom: 0.1em;
+      left: 0;
+      width: 0%;
+      height: 0.4em;
+      background: var(--color-highlight);
+      z-index: -1;
+      opacity: 0.6;
+      box-shadow: var(--glow-highlight);
+      animation: highlightSweep 1s ease-out forwards;
+      border-radius: 2px;
+    }
+
+    @keyframes highlightSweep {
+      0% {
+        width: 0%;
+        opacity: 0;
+      }
+      100% {
+        width: 100%;
+        opacity: 0.6;
+      }
+    }
+
+    .hero-subtitle {
+      font-size: var(--font-size-xl);
+      color: var(--color-text-secondary);
+      line-height: var(--line-height-relaxed);
+      margin-bottom: var(--space-8);
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .hero-cta-secondary {
+      font-size: var(--font-size-base);
+      color: var(--color-text-secondary);
+    }
+
+    .hero-cta-secondary a {
+      color: var(--color-text-primary);
+      font-weight: var(--font-weight-bold);
+      text-decoration: underline;
+      transition: color var(--transition-base) ease;
+    }
+
+    .hero-cta-secondary a:hover {
+      color: var(--color-accent-400);
+    }
+
+    /* VIDEO CONTAINER - 788px height, responsive */
+    .hero-video-container {
+      max-width: 1000px;
+      margin: 0 auto var(--space-12);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+      position: relative;
+      width: 100%;
+      height: 788px;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    @media (max-width: 768px) {
+      .hero-video-container {
+        height: clamp(300px, 60vw, 500px);
+      }
+    }
+
+    .hero-video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Logo Carousel - Responsive */
+    .logo-carousel-wrapper {
+      margin-bottom: var(--space-8);
+      overflow: hidden;
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      width: 100%;
+    }
+
+    .logo-carousel {
+      display: flex;
+      gap: var(--space-12);
+      animation: scroll 40s linear infinite;
+      width: fit-content;
+    }
+
+    .logo-carousel:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .logo-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 60px;
+      padding: 0 var(--space-6);
+      flex-shrink: 0;
+    }
+
+    .logo-item img {
+      height: 40px;
+      width: auto;
+      filter: brightness(0) invert(1);
+    }
+
+    .hero-secondary-cta {
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: var(--space-12) 0 var(--space-8);
+      }
+    }
+
+    /* ============================================================
+       PRODUCT FEATURES - RESPONSIVE BENTO GRID
+       ============================================================ */
+    .features-section {
+      padding: var(--space-24) 0;
+      width: 100%;
+    }
+
+    .bento-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+      width: 100%;
+    }
+
+    @media (min-width: 768px) {
+      .bento-container {
+        grid-template-columns: 70% 30%;
+        min-height: 850px;
+      }
+    }
+
+    .main-feature-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
+      min-height: 400px;
+    }
+
+    @media (min-width: 768px) {
+      .main-feature-card {
+        min-height: 100%;
+      }
+    }
+
+    .main-feature-screenshot {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+      border-radius: var(--radius-base);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-lg);
+      min-height: 300px;
+    }
+
+    .side-features {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+
+    .feature-card-small {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .feature-card-small:hover {
+      transform: translate3d(0, -2px, 0);
+      border-color: var(--color-accent-400);
+    }
+
+    .feature-card-small.active {
+      border-color: var(--color-accent-400);
+      background: rgba(172, 255, 23, 0.1);
+    }
+
+    .feature-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-bold);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-pill);
+      margin-bottom: var(--space-3);
+      width: fit-content;
+    }
+
+    .tag-price-test {
+      background: rgba(172, 255, 23, 0.1);
+      color: var(--color-accent-400);
+    }
+
+    .tag-url-redirect {
+      background: rgba(255, 95, 71, 0.1);
+      color: #FF5F47;
+    }
+
+    .tag-shipping {
+      background: rgba(63, 180, 232, 0.1);
+      color: var(--color-primary-400);
+    }
+
+    .tag-theme {
+      background: rgba(255, 0, 155, 0.1);
+      color: #FF009B;
+    }
+
+    .feature-card-small h4 {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-bold);
+      margin-bottom: var(--space-2);
+      line-height: var(--line-height-tight);
+    }
+
+    .feature-card-small p {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+      line-height: var(--line-height-normal);
+    }
+
+    @media (max-width: 767px) {
+      .side-features {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .side-features {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ============================================================
+       TESTIMONIALS - RESPONSIVE
+       ============================================================ */
+    .testimonials-section {
+      padding: var(--space-24) 0;
+      background: var(--color-black);
+      width: 100%;
+    }
+
+    .stats-row {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-16);
+      margin-bottom: var(--space-16);
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: var(--font-size-5xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-text-primary);
+      line-height: 1;
+      margin-bottom: var(--space-2);
+    }
+
+    .stat-label {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+    }
+
+    .testimonial-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-12);
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .testimonial-content {
+        grid-template-columns: 1.2fr 1fr;
+      }
+    }
+
+    .testimonial-video {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      border-radius: 50%;
+      box-shadow: var(--shadow-lg);
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .testimonial-quote-card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: var(--space-8);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .testimonial-quote {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--line-height-relaxed);
+      margin-bottom: var(--space-6);
+      color: var(--color-text-primary);
+    }
+
+    .testimonial-author {
+      font-size: var(--font-size-base);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-6);
+    }
+
+    .testimonial-author strong {
+      color: var(--color-text-primary);
+      display: block;
+      margin-bottom: var(--space-1);
+    }
+
+    /* ============================================================
+       INTEGRATIONS - RESPONSIVE
+       ============================================================ */
+    .integrations-section {
+      padding: var(--space-24) 0;
+      width: 100%;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: var(--space-12);
+    }
+
+    .section-header h2 {
+      font-size: var(--font-size-5xl);
+      font-weight: var(--font-weight-bold);
+      line-height: var(--line-height-tight);
+      margin-bottom: var(--space-4);
+    }
+
+    .integrations-image-container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .integrations-image {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius-lg);
+    }
+
+    /* ============================================================
+       GET STARTED - RESPONSIVE
+       ============================================================ */
+    .get-started-section {
+      padding: var(--space-32) 0;
+      text-align: center;
+      background: var(--color-black);
+      width: 100%;
+    }
+
+    .get-started-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .get-started-content h2 {
+      font-size: var(--font-size-5xl);
+      font-weight: var(--font-weight-bold);
+      line-height: var(--line-height-tight);
+      margin-bottom: var(--space-8);
+    }
+
+    .headline-line {
+      display: block;
+    }
+
+    .get-started-cta-group {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+
+    /* ============================================================
+       FOOTER - RESPONSIVE
+       ============================================================ */
+    .footer {
+      background: var(--color-black);
+      padding: var(--space-12) 0 var(--space-6);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      width: 100%;
+    }
+
+    .footer-content {
+      text-align: center;
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
+    }
+
+    .footer-content p {
+      margin-bottom: var(--space-2);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-6);
+      margin-top: var(--space-4);
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--color-text-secondary);
+      transition: color var(--transition-base) ease;
+    }
+
+    .footer-link:hover {
+      color: var(--color-accent-400);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION - FULL WIDTH
+       ============================================================ -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="navbar-container">
+      <a href="/" class="navbar-brand" aria-label="ABConvert Home">
+        <img src="ABConvert_Logo_Black.png" alt="ABConvert" class="navbar-logo">
+      </a>
+
+      <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" id="mobile-menu-btn">
+        ☰
+      </button>
+
+      <ul class="navbar-menu" id="navbar-menu">
+        <li><a href="#pricing" class="navbar-link">Pricing</a></li>
+        <li><a href="#success-stories" class="navbar-link">Success Stories</a></li>
+        <li><a href="#partnership" class="navbar-link">Partnership</a></li>
+        <li class="navbar-dropdown">
+          <button class="navbar-link dropdown-trigger active" aria-haspopup="true" aria-expanded="false">
+            Resources
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#blog" class="dropdown-item" role="menuitem">Blog</a></li>
+            <li><a href="#help" class="dropdown-item" role="menuitem">Help</a></li>
+            <li><a href="#docs" class="dropdown-item" role="menuitem">Docs</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <a href="#free-trial" class="navbar-cta btn btn-dark">
+        <svg class="shopify-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M16.7 5.3c-.1-.1-2.2-.2-2.2-.2s-1.4-1.4-1.6-1.6c-.2-.2-.6-.1-.7 0l-1 .3c-.3-.9-.9-1.8-1.8-1.8h-.3C8.6 1.3 8 .9 7.5.9c-3.4 0-5 4.2-5.5 6.3-1.4.4-2.4.8-2.5.8-.8.3-.8.3-.9 1-.1.5-2.1 16.2-2.1 16.2L13.3 27l9.2-2.1S16.9 5.5 16.7 5.3zm-3.3-.9l-1.4.4c0-.9-.2-2-.7-3 .8.1 1.6 1.5 2.1 2.6zM11 2.5c.4 0 .7.2 1 .5-.6 1-1.2 2.2-1.7 4.5L8 8.2c.5-2.2 1.7-5.7 3-5.7zm-2.6.3c.1.5.2 1 .2 1.6 0 .9-.1 1.8-.3 2.7L6.5 7.8c.8-2.4 1.5-4.4 1.9-5z"/>
+        </svg>
+        Free trial
+      </a>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       HERO SECTION
+       ============================================================ -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-pill" role="status" aria-label="Built for Shopify brands">
+          <span>Built for</span>
+          <svg class="shopify-logo" viewBox="0 0 100 28" fill="currentColor">
+            <path d="M30.3 8.9c-.1-.1-2.2-.2-2.2-.2s-1.4-1.4-1.6-1.6c-.2-.2-.6-.1-.7 0l-1 .3c-.3-.9-.9-1.8-1.8-1.8h-.3c-.4-.6-1-1-1.5-1-3.4 0-5 4.2-5.5 6.3-1.4.4-2.4.8-2.5.8-.8.3-.8.3-.9 1-.1.5-2.1 16.2-2.1 16.2L27 30.4l9.2-2.1S30.5 9 30.3 8.9zm-3.3-.9l-1.4.4c0-.9-.2-2-.7-3 .8.1 1.6 1.5 2.1 2.6zM24.4 6c.4 0 .7.2 1 .5-.6 1-1.2 2.2-1.7 4.5l-2.3.7c.5-2.2 1.7-5.7 3-5.7zm-2.6.3c.1.5.2 1 .2 1.6 0 .9-.1 1.8-.3 2.7l-1.8-.5c.8-2.4 1.5-4.4 1.9-5z" transform="scale(1.2)"/>
+          </svg>
+          <span>Shopify brands</span>
+        </div>
+
+        <h1 class="hero-headline">
+          Streamlined A/B testing for <span class="highlight">scaling</span> Shopify brands.
+        </h1>
+
+        <p class="hero-subtitle">
+          Intuitive to run. Decision-grade to trust. Priced for growing teams.
+        </p>
+
+        <div class="hero-cta-group">
+          <button class="btn btn-primary btn-large" onclick="window.location.href='#free-trial'">
+            Start 14 day free trial
+          </button>
+          <p class="hero-cta-secondary">
+            Prefer to talk to the expert? <a href="#book-demo">Book a Demo</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- YouTube Video Embed - 788px height -->
+      <div class="hero-video-container" id="hero-video-container">
+        <iframe
+          id="hero-video"
+          src="https://www.youtube.com/embed/zxWG17zvuEA?enablejsapi=1&mute=1&autoplay=1&controls=1&rel=0"
+          title="ABConvert Product Demo"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+
+      <!-- Logo Carousel -->
+      <div class="logo-carousel-wrapper" aria-label="Trusted by leading brands">
+        <div class="logo-carousel">
+          <div class="logo-item">
+            <svg width="120" height="40" viewBox="0 0 120 40" fill="white">
+              <text x="10" y="25" font-family="Roboto" font-size="14" font-weight="700">VANQUISH</text>
+            </svg>
+          </div>
+          <div class="logo-item">
+            <svg width="120" height="40" viewBox="0 0 120 40" fill="white">
+              <text x="10" y="25" font-family="Roboto" font-size="14" font-weight="700">KOMPSOS</text>
+            </svg>
+          </div>
+          <div class="logo-item">
+            <svg width="120" height="40" viewBox="0 0 120 40" fill="white">
+              <text x="10" y="25" font-family="Roboto" font-size="14" font-weight="700">EDIKTED</text>
+            </svg>
+          </div>
+          <div class="logo-item">
+            <svg width="120" height="40" viewBox="0 0 120 40" fill="white">
+              <text x="10" y="25" font-family="Roboto" font-size="14" font-weight="700">FÜM</text>
+            </svg>
+          </div>
+          <div class="logo-item">
+            <svg width="120" height="40" viewBox="0 0 120 40" fill="white">
+              <text x="10" y="25" font-family="Roboto" font-size="14" font-weight="700">BRAND</text>
+            </svg>
+          </div>
+          <!-- Duplicate for infinite scroll -->
+          <div class="logo-item">
+            <svg width="120" height="40" viewBox="0 0 120 40" fill="white">
+              <text x="10" y="25" font-family="Roboto" font-size="14" font-weight="700">VANQUISH</text>
+            </svg>
+          </div>
+          <div class="logo-item">
+            <svg width="120" height="40" viewBox="0 0 120 40" fill="white">
+              <text x="10" y="25" font-family="Roboto" font-size="14" font-weight="700">KOMPSOS</text>
+            </svg>
+          </div>
+          <div class="logo-item">
+            <svg width="120" height="40" viewBox="0 0 120 40" fill="white">
+              <text x="10" y="25" font-family="Roboto" font-size="14" font-weight="700">EDIKTED</text>
+            </svg>
+          </div>
+          <div class="logo-item">
+            <svg width="120" height="40" viewBox="0 0 120 40" fill="white">
+              <text x="10" y="25" font-family="Roboto" font-size="14" font-weight="700">FÜM</text>
+            </svg>
+          </div>
+          <div class="logo-item">
+            <svg width="120" height="40" viewBox="0 0 120 40" fill="white">
+              <text x="10" y="25" font-family="Roboto" font-size="14" font-weight="700">BRAND</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-secondary-cta">
+        <button class="btn btn-secondary" onclick="window.location.href='#success-stories'">
+          Success stories
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PRODUCT FEATURES (INTERACTIVE BENTO GRID)
+       ============================================================ -->
+  <section class="features-section" id="features">
+    <div class="container">
+      <div class="bento-container">
+        <!-- Main Feature Card (Left) -->
+        <div class="main-feature-card" id="main-feature">
+          <div class="main-feature-screenshot">
+            Product Screenshot
+          </div>
+        </div>
+
+        <!-- Side Feature Cards (Right) -->
+        <div class="side-features">
+          <div class="feature-card-small active" data-feature="price">
+            <span class="feature-tag tag-price-test">💰 Price Test</span>
+            <h4>Find Your Sweet Spot for Profit.</h4>
+            <p>Discover which price drives the most sales and keeps your margins strong.</p>
+          </div>
+
+          <div class="feature-card-small" data-feature="url">
+            <span class="feature-tag tag-url-redirect">🔀 URL Test</span>
+            <h4>Send Shoppers to the Page That Converts.</h4>
+            <p>Compare landing pages or product URLs to see which one truly sells.</p>
+          </div>
+
+          <div class="feature-card-small" data-feature="theme">
+            <span class="feature-tag tag-theme">👁️ Template & Theme Test</span>
+            <h4>Design That Drives Action.</h4>
+            <p>Test different store themes to see which layout makes shoppers click and buy more.</p>
+          </div>
+
+          <div class="feature-card-small" data-feature="shipping">
+            <span class="feature-tag tag-shipping">📦 Shipping Test</span>
+            <h4>Turn Shipping Into a Sales Boost.</h4>
+            <p>Find the perfect shipping offer like "Free over $50" that lifts order value and conversion.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TESTIMONIALS / USER FEEDBACK
+       ============================================================ -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="container">
+      <!-- Stats Row -->
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-value">1200+</div>
+          <div class="stat-label">Trusted by stores</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">$2.0B</div>
+          <div class="stat-label">in GMV</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">4.8★</div>
+          <div class="stat-label">Built for Shopify</div>
+        </div>
+      </div>
+
+      <!-- Testimonial Content -->
+      <div class="testimonial-content">
+        <video
+          class="testimonial-video"
+          controls
+          poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Crect fill='%23000000' width='640' height='640'/%3E%3Ccircle cx='320' cy='320' r='280' fill='%23191919'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23868E96' font-family='Roboto' font-size='20'%3ETestimonial Video%3C/text%3E%3C/svg%3E"
+          aria-label="Customer testimonial video"
+        >
+          <source src="#" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+
+        <div class="testimonial-quote-card">
+          <blockquote class="testimonial-quote">
+            "A/B testing that finally respects how Shopify teams work."
+          </blockquote>
+          <div class="testimonial-author">
+            <strong>Jane Doe</strong>
+            Growth Lead at Northline
+          </div>
+          <button class="btn btn-primary" onclick="window.location.href='#free-trial'">
+            Try on Shopify
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       INTEGRATIONS SECTION
+       ============================================================ -->
+  <section class="integrations-section" id="integrations">
+    <div class="container">
+      <div class="section-header">
+        <h2>Work seamless with your existing tech stack</h2>
+      </div>
+
+      <div class="integrations-image-container">
+        <svg class="integrations-image" viewBox="0 0 1200 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="1200" height="400" fill="rgba(255,255,255,0.02)"/>
+          <text x="600" y="200" text-anchor="middle" fill="#868E96" font-family="Roboto" font-size="24">Integration Partners Grid Placeholder</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       GET STARTED SECTION
+       ============================================================ -->
+  <section class="get-started-section" id="get-started">
+    <div class="container">
+      <div class="get-started-content">
+        <h2>
+          <span class="headline-line">Decision-ready results you can act on</span>
+          <span class="headline-line">No design/dev sprints required.</span>
+        </h2>
+
+        <div class="get-started-cta-group">
+          <button class="btn btn-primary btn-large" onclick="window.location.href='#free-trial'">
+            Run your first test in 7 days
+          </button>
+          <button class="btn btn-secondary btn-large" onclick="window.location.href='#book-demo'">
+            Talk to our expert
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p>&copy; 2025 ABConvert. All rights reserved.</p>
+        <p>Built with ❤️ for Shopify merchants</p>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="#privacy" class="footer-link">Privacy</a>
+          <a href="#terms" class="footer-link">Terms</a>
+          <a href="#contact" class="footer-link">Contact</a>
+          <a href="#docs" class="footer-link">Documentation</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+       ============================================================ -->
+  <script>
+    // ============================================================
+    // Mobile Menu Toggle
+    // ============================================================
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const navbarMenu = document.getElementById('navbar-menu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      navbarMenu.classList.toggle('active');
+      const isExpanded = navbarMenu.classList.contains('active');
+      mobileMenuBtn.setAttribute('aria-expanded', isExpanded);
+    });
+
+    // ============================================================
+    // Interactive Feature Cards
+    // ============================================================
+    const featureCards = document.querySelectorAll('.feature-card-small');
+    const mainFeature = document.getElementById('main-feature');
+
+    let currentIndex = 0;
+    const features = Array.from(featureCards);
+
+    featureCards.forEach((card, index) => {
+      card.addEventListener('click', () => {
+        // Remove active class from all cards
+        featureCards.forEach(c => c.classList.remove('active'));
+
+        // Add active class to clicked card
+        card.classList.add('active');
+
+        // Rotate cards
+        const clickedIndex = features.indexOf(card);
+        const newOrder = [
+          features[clickedIndex],
+          ...features.slice(0, clickedIndex),
+          ...features.slice(clickedIndex + 1)
+        ];
+
+        const sideFeatures = document.querySelector('.side-features');
+        newOrder.forEach(feature => {
+          sideFeatures.appendChild(feature);
+        });
+
+        features.length = 0;
+        features.push(...newOrder);
+      });
+    });
+
+    // ============================================================
+    // Hero Video Autoplay/Pause with IntersectionObserver
+    // ============================================================
+    let player;
+    let isYouTubeAPIReady = false;
+
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    window.onYouTubeIframeAPIReady = function() {
+      player = new YT.Player('hero-video', {
+        events: {
+          'onReady': onPlayerReady
+        }
+      });
+      isYouTubeAPIReady = true;
+    };
+
+    function onPlayerReady(event) {
+      const videoContainer = document.getElementById('hero-video-container');
+
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5
+      };
+
+      const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (player && player.playVideo) {
+              player.playVideo();
+            }
+          } else {
+            if (player && player.pauseVideo) {
+              player.pauseVideo();
+            }
+          }
+        });
+      }, observerOptions);
+
+      videoObserver.observe(videoContainer);
+    }
+
+    // ============================================================
+    // Dropdown Menu - Keyboard Accessibility
+    // ============================================================
+    const dropdownTrigger = document.querySelector('.dropdown-trigger');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+
+    if (dropdownTrigger && dropdownMenu) {
+      dropdownTrigger.addEventListener('click', () => {
+        const isExpanded = dropdownTrigger.getAttribute('aria-expanded') === 'true';
+        dropdownTrigger.setAttribute('aria-expanded', !isExpanded);
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.navbar-dropdown')) {
+          dropdownTrigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Keyboard navigation
+      dropdownTrigger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const isExpanded = dropdownTrigger.getAttribute('aria-expanded') === 'true';
+          dropdownTrigger.setAttribute('aria-expanded', !isExpanded);
+          if (!isExpanded) {
+            setTimeout(() => {
+              const firstItem = dropdownMenu.querySelector('.dropdown-item');
+              if (firstItem) firstItem.focus();
+            }, 100);
+          }
+        } else if (e.key === 'Escape') {
+          dropdownTrigger.setAttribute('aria-expanded', 'false');
+          dropdownTrigger.focus();
+        }
+      });
+
+      // Arrow key navigation in dropdown
+      const dropdownItems = dropdownMenu.querySelectorAll('.dropdown-item');
+      dropdownItems.forEach((item, index) => {
+        item.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            const nextIndex = (index + 1) % dropdownItems.length;
+            dropdownItems[nextIndex].focus();
+          } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            const prevIndex = (index - 1 + dropdownItems.length) % dropdownItems.length;
+            dropdownItems[prevIndex].focus();
+          } else if (e.key === 'Escape') {
+            dropdownTrigger.setAttribute('aria-expanded', 'false');
+            dropdownTrigger.focus();
+          }
+        });
+      });
+    }
+
+    // ============================================================
+    // Smooth Scroll
+    // ============================================================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    console.log('ABConvert Homepage Final V2 loaded successfully!');
+  </script>
+
+</body>
+</html>
