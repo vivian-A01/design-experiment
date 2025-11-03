@@ -922,10 +922,16 @@
     .network-diagram {
       position: relative;
       width: 100%;
-      height: 500px;
+      height: 600px;
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    @media (max-width: 768px) {
+      .network-diagram {
+        height: 500px;
+      }
     }
 
     .network-svg {
@@ -938,6 +944,19 @@
       stroke: var(--color-accent-400);
       stroke-width: 2;
       transition: all 0.3s ease;
+      opacity: 0;
+      animation: fadeInNode 0.6s ease-out forwards;
+    }
+
+    @keyframes fadeInNode {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     .integration-node:hover {
@@ -945,12 +964,19 @@
       stroke-width: 3;
     }
 
+    .integration-node-center {
+      fill: rgba(172, 255, 23, 0.15);
+      stroke: var(--color-accent-400);
+      stroke-width: 3;
+    }
+
     .integration-line {
       stroke: var(--color-accent-400);
-      stroke-width: 2;
+      stroke-width: 1.5;
+      opacity: 0.4;
       stroke-dasharray: 1000;
       stroke-dashoffset: 1000;
-      animation: drawLine 2s ease-out forwards;
+      animation: drawLine 1.5s ease-out forwards;
     }
 
     @keyframes drawLine {
@@ -960,17 +986,62 @@
     }
 
     .integration-line:nth-child(1) { animation-delay: 0s; }
-    .integration-line:nth-child(2) { animation-delay: 0.2s; }
-    .integration-line:nth-child(3) { animation-delay: 0.4s; }
-    .integration-line:nth-child(4) { animation-delay: 0.6s; }
-    .integration-line:nth-child(5) { animation-delay: 0.8s; }
+    .integration-line:nth-child(2) { animation-delay: 0.08s; }
+    .integration-line:nth-child(3) { animation-delay: 0.16s; }
+    .integration-line:nth-child(4) { animation-delay: 0.24s; }
+    .integration-line:nth-child(5) { animation-delay: 0.32s; }
+    .integration-line:nth-child(6) { animation-delay: 0.4s; }
+    .integration-line:nth-child(7) { animation-delay: 0.48s; }
+    .integration-line:nth-child(8) { animation-delay: 0.56s; }
+    .integration-line:nth-child(9) { animation-delay: 0.64s; }
+    .integration-line:nth-child(10) { animation-delay: 0.72s; }
+    .integration-line:nth-child(11) { animation-delay: 0.8s; }
+    .integration-line:nth-child(12) { animation-delay: 0.88s; }
+
+    .integration-node:nth-child(13) { animation-delay: 0s; }
+    .integration-node:nth-child(14) { animation-delay: 0.08s; }
+    .integration-node:nth-child(15) { animation-delay: 0.16s; }
+    .integration-node:nth-child(16) { animation-delay: 0.24s; }
+    .integration-node:nth-child(17) { animation-delay: 0.32s; }
+    .integration-node:nth-child(18) { animation-delay: 0.4s; }
+    .integration-node:nth-child(19) { animation-delay: 0.48s; }
+    .integration-node:nth-child(20) { animation-delay: 0.56s; }
+    .integration-node:nth-child(21) { animation-delay: 0.64s; }
+    .integration-node:nth-child(22) { animation-delay: 0.72s; }
+    .integration-node:nth-child(23) { animation-delay: 0.8s; }
+    .integration-node:nth-child(24) { animation-delay: 0.88s; }
 
     .integration-text {
       fill: var(--color-text-primary);
-      font-size: 14px;
+      font-size: 12px;
       font-weight: var(--font-weight-medium);
       text-anchor: middle;
+      opacity: 0;
+      animation: fadeInText 0.6s ease-out forwards;
     }
+
+    @keyframes fadeInText {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .integration-text:nth-child(25) { animation-delay: 0.1s; }
+    .integration-text:nth-child(26) { animation-delay: 0.18s; }
+    .integration-text:nth-child(27) { animation-delay: 0.26s; }
+    .integration-text:nth-child(28) { animation-delay: 0.34s; }
+    .integration-text:nth-child(29) { animation-delay: 0.42s; }
+    .integration-text:nth-child(30) { animation-delay: 0.5s; }
+    .integration-text:nth-child(31) { animation-delay: 0.58s; }
+    .integration-text:nth-child(32) { animation-delay: 0.66s; }
+    .integration-text:nth-child(33) { animation-delay: 0.74s; }
+    .integration-text:nth-child(34) { animation-delay: 0.82s; }
+    .integration-text:nth-child(35) { animation-delay: 0.9s; }
+    .integration-text:nth-child(36) { animation-delay: 0.98s; }
+    .integration-text:nth-child(37) { animation-delay: 0.05s; }
 
     .integration-cta {
       display: flex;
@@ -998,6 +1069,14 @@
       font-weight: var(--font-weight-bold);
       line-height: var(--line-height-tight);
       margin-bottom: var(--space-4);
+      white-space: nowrap;
+    }
+
+    @media (max-width: 768px) {
+      .get-started-content h2 {
+        white-space: normal;
+        font-size: var(--font-size-3xl);
+      }
     }
 
     .get-started-subheading {
@@ -1341,35 +1420,78 @@
       <div class="integrations-container">
         <!-- Network Diagram -->
         <div class="network-diagram">
-          <svg class="network-svg" viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg">
-            <!-- Lines (drawn with animation) -->
-            <line class="integration-line" x1="300" y1="250" x2="150" y2="100" />
-            <line class="integration-line" x1="300" y1="250" x2="450" y2="100" />
-            <line class="integration-line" x1="300" y1="250" x2="500" y2="300" />
-            <line class="integration-line" x1="300" y1="250" x2="400" y2="420" />
-            <line class="integration-line" x1="300" y1="250" x2="100" y2="380" />
+          <svg class="network-svg" viewBox="0 0 700 600" xmlns="http://www.w3.org/2000/svg">
+            <!-- Lines (drawn with animation) - 12 connections in a circular pattern -->
+            <line class="integration-line" x1="350" y1="300" x2="350" y2="120" />
+            <line class="integration-line" x1="350" y1="300" x2="500" y2="150" />
+            <line class="integration-line" x1="350" y1="300" x2="580" y2="240" />
+            <line class="integration-line" x1="350" y1="300" x2="610" y2="350" />
+            <line class="integration-line" x1="350" y1="300" x2="560" y2="450" />
+            <line class="integration-line" x1="350" y1="300" x2="450" y2="520" />
+            <line class="integration-line" x1="350" y1="300" x2="250" y2="520" />
+            <line class="integration-line" x1="350" y1="300" x2="140" y2="450" />
+            <line class="integration-line" x1="350" y1="300" x2="90" y2="350" />
+            <line class="integration-line" x1="350" y1="300" x2="120" y2="240" />
+            <line class="integration-line" x1="350" y1="300" x2="200" y2="150" />
+            <line class="integration-line" x1="350" y1="300" x2="350" y2="480" />
 
             <!-- Center Node (ABConvert) -->
-            <circle class="integration-node" cx="300" cy="250" r="60" />
-            <text class="integration-text" x="300" y="255">ABConvert</text>
+            <circle class="integration-node integration-node-center" cx="350" cy="300" r="65" />
+            <text class="integration-text" x="350" y="295" font-size="16" font-weight="700">ABConvert</text>
+            <text class="integration-text" x="350" y="312" font-size="10" opacity="0.7">Platform</text>
 
-            <!-- Integration Nodes -->
-            <circle class="integration-node" cx="150" cy="100" r="45" />
-            <text class="integration-text" x="150" y="100" font-size="11">Kaching</text>
-            <text class="integration-text" x="150" y="112" font-size="11">Bundle</text>
+            <!-- Integration Nodes in Circular Pattern (12 nodes) -->
+            <!-- Top -->
+            <circle class="integration-node" cx="350" cy="120" r="38" />
+            <text class="integration-text" x="350" y="125">Klaviyo</text>
 
-            <circle class="integration-node" cx="450" cy="100" r="45" />
-            <text class="integration-text" x="450" y="105">Vitals</text>
+            <!-- Top-Right -->
+            <circle class="integration-node" cx="500" cy="150" r="38" />
+            <text class="integration-text" x="500" y="155">Vitals</text>
 
-            <circle class="integration-node" cx="500" cy="300" r="45" />
-            <text class="integration-text" x="500" y="305">Bundler</text>
+            <!-- Right-Top -->
+            <circle class="integration-node" cx="580" cy="240" r="38" />
+            <text class="integration-text" x="580" y="245">Rebuy</text>
 
-            <circle class="integration-node" cx="400" cy="420" r="45" />
-            <text class="integration-text" x="400" y="425">Rebuy</text>
+            <!-- Right -->
+            <circle class="integration-node" cx="610" cy="350" r="38" />
+            <text class="integration-text" x="610" y="355">Bundler</text>
 
-            <circle class="integration-node" cx="100" cy="380" r="45" />
-            <text class="integration-text" x="100" y="380" font-size="11">Swatch</text>
-            <text class="integration-text" x="100" y="392" font-size="11">King</text>
+            <!-- Right-Bottom -->
+            <circle class="integration-node" cx="560" cy="450" r="38" />
+            <text class="integration-text" x="560" y="450" font-size="11">Kaching</text>
+            <text class="integration-text" x="560" y="462" font-size="11">Bundle</text>
+
+            <!-- Bottom-Right -->
+            <circle class="integration-node" cx="450" cy="520" r="38" />
+            <text class="integration-text" x="450" y="520" font-size="11">Google</text>
+            <text class="integration-text" x="450" y="532" font-size="11">Analytics</text>
+
+            <!-- Bottom -->
+            <circle class="integration-node" cx="350" cy="480" r="38" />
+            <text class="integration-text" x="350" y="485">Yotpo</text>
+
+            <!-- Bottom-Left -->
+            <circle class="integration-node" cx="250" cy="520" r="38" />
+            <text class="integration-text" x="250" y="525">Recharge</text>
+
+            <!-- Left-Bottom -->
+            <circle class="integration-node" cx="140" cy="450" r="38" />
+            <text class="integration-text" x="140" y="450" font-size="11">Swatch</text>
+            <text class="integration-text" x="140" y="462" font-size="11">King</text>
+
+            <!-- Left -->
+            <circle class="integration-node" cx="90" cy="350" r="38" />
+            <text class="integration-text" x="90" y="355">Gorgias</text>
+
+            <!-- Left-Top -->
+            <circle class="integration-node" cx="120" cy="240" r="38" />
+            <text class="integration-text" x="120" y="245">Attentive</text>
+
+            <!-- Top-Left -->
+            <circle class="integration-node" cx="200" cy="150" r="38" />
+            <text class="integration-text" x="200" y="150" font-size="11">Triple</text>
+            <text class="integration-text" x="200" y="162" font-size="11">Whale</text>
           </svg>
         </div>
 
