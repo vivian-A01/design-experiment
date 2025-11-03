@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ABConvert - Streamlined A/B Testing for Shopify Brands</title>
+
+  <!-- Google Fonts: Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       DESIGN SYSTEM TOKENS (CSS Custom Properties) - UPDATED V2
+       ============================================================ */
+    :root {
+      /* Colors - Primary Blue */
+      --color-blue-01: #217BD1;
+      --color-blue-02: #3FB4E8;
+      --color-primary-400: #3FB4E8;
+      --color-primary-500: #217BD1;
+
+      /* Colors - Accent Lime/Green */
+      --color-accent-primary: #ACFF19;
+      --color-accent-400: #ACFF17;
+      --color-accent-300: #DFFF33;
+      --color-highlight: #5A912B;
+
+      /* Colors - Neutrals */
+      --color-neutral-0: #FFFFFF;
+      --color-neutral-dark: #191919;
+      --color-black: #000000;
+
+      /* Text Colors */
+      --color-text-primary: #FFFFFF;
+      --color-text-secondary: #ADB5BD;
+      --color-text-inverse: #000000;
+
+      /* Typography - Responsive */
+      --font-family-primary: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+
+      --font-size-xs: clamp(0.7rem, 0.65rem + 0.25vw, 0.75rem);
+      --font-size-sm: clamp(0.8rem, 0.75rem + 0.25vw, 0.875rem);
+      --font-size-base: clamp(0.9rem, 0.85rem + 0.25vw, 1rem);
+      --font-size-lg: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --font-size-xl: clamp(1.1rem, 1rem + 0.5vw, 1.25rem);
+      --font-size-2xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+      --font-size-3xl: clamp(1.5rem, 1.3rem + 1vw, 1.875rem);
+      --font-size-4xl: clamp(1.75rem, 1.5rem + 1.25vw, 2.25rem);
+      --font-size-5xl: clamp(2rem, 1.75rem + 1.5vw, 3rem);
+      --font-size-6xl: clamp(2.5rem, 2rem + 2.5vw, 3.75rem);
+
+      --font-weight-light: 300;
+      --font-weight-regular: 400;
+      --font-weight-medium: 500;
+      --font-weight-bold: 700;
+      --font-weight-black: 900;
+
+      --line-height-tight: 1.2;
+      --line-height-normal: 1.5;
+      --line-height-relaxed: 1.75;
+
+      /* Spacing - Fluid */
+      --space-1: clamp(0.2rem, 0.15rem + 0.25vw, 0.25rem);
+      --space-2: clamp(0.4rem, 0.35rem + 0.25vw, 0.5rem);
+      --space-3: clamp(0.6rem, 0.5rem + 0.5vw, 0.75rem);
+      --space-4: clamp(0.8rem, 0.7rem + 0.5vw, 1rem);
+      --space-6: clamp(1.2rem, 1rem + 1vw, 1.5rem);
+      --space-8: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);
+      --space-10: clamp(1.75rem, 1.5rem + 1.25vw, 2.5rem);
+      --space-12: clamp(2rem, 1.75rem + 1.25vw, 3rem);
+      --space-16: clamp(2.5rem, 2rem + 2vw, 4rem);
+      --space-20: clamp(3rem, 2.5rem + 2.5vw, 5rem);
+      --space-24: clamp(3.5rem, 3rem + 2.5vw, 6rem);
+      --space-32: clamp(4rem, 3.5rem + 2.5vw, 8rem);
+
+      /* Border Radius */
+      --radius-button: 8rem;
+      --radius-sm: 0.25rem;
+      --radius-base: 0.5rem;
+      --radius-md: 0.75rem;
+      --radius-lg: 1rem;
+      --radius-xl: 1.5rem;
+      --radius-pill: 8rem;
+
+      /* Shadows */
+      --shadow-md: 0 8px 16px 0 rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 16px 32px 0 rgba(0, 0, 0, 0.6);
+      --shadow-xl: 0 24px 48px 0 rgba(0, 0, 0, 0.7);
+
+      /* Glow Effects */
+      --glow-accent: 0 0 20px rgba(172, 255, 23, 0.6);
+      --glow-highlight: 0 0 15px rgba(90, 145, 43, 0.8);
+
+      /* Transitions */
+      --transition-fast: 150ms;
+      --transition-base: 200ms;
+      --transition-slow: 300ms;
+
+      /* Container Widths - Responsive */
+      --container-max: 1400px;
+      --container-padding: clamp(1rem, 5vw, 310px);
+    }
+
+    /* ============================================================
+       RESET & BASE STYLES
+       ============================================================ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    *:focus {
+      outline: none !important;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-family-primary);
+      background: var(--color-black);
+      color: var(--color-text-primary);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-normal);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      outline: none;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      height: auto;
+    }
+
+    /* ============================================================
+       UTILITY CLASSES
+       ============================================================ */
+    .container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding-left: var(--container-padding);
+      padding-right: var(--container-padding);
+      width: 100%;
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        padding-left: clamp(2rem, 8vw, 310px);
+        padding-right: clamp(2rem, 8vw, 310px);
+      }
+    }
+
+    /* ============================================================
+       GLOBAL BUTTON STYLES
+       ============================================================ */
+    .btn,
+    button {
+      display: flex;
+      flex-flow: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 0.75rem 1rem;
+      border-radius: 8rem;
+      font-weight: var(--font-weight-medium);
+      font-size: var(--font-size-base);
+      transition: all var(--transition-base) ease;
+      cursor: pointer;
+      border: none;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--color-accent-primary);
+      color: var(--color-text-inverse);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-accent-300);
+      transform: translate3d(0, -2px, 0) scale3d(1.02, 1.02, 1);
+      box-shadow: var(--glow-accent);
+    }
+
+    .btn-secondary {
+      background: var(--color-neutral-0);
+      color: var(--color-text-inverse);
+    }
+
+    .btn-secondary:hover {
+      background: #F5F5F5;
+      transform: translate3d(0, -2px, 0) scale3d(1.02, 1.02, 1);
+    }
+
+    .btn-dark {
+      background: var(--color-neutral-dark);
+      color: var(--color-text-primary);
+    }
+
+    .btn-dark:hover {
+      background: #2A2A2A;
+      transform: translate3d(0, -1px, 0) scale3d(1.02, 1.02, 1);
+    }
+
+    .btn-tertiary {
+      background: transparent;
+      color: var(--color-text-primary);
+      border: 2px solid var(--color-text-primary);
+    }
+
+    .btn-tertiary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translate3d(0, -2px, 0) scale3d(1.02, 1.02, 1);
+    }
+
+    .btn-large {
+      padding: 0.75rem 1rem;
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    /* ============================================================
+       NAVIGATION - CENTERED MENU
+       ============================================================ */
+    .navbar {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: var(--space-4) 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      width: 100vw;
+      margin-left: calc(-1 * var(--container-padding));
+      padding-left: var(--container-padding);
+      padding-right: var(--container-padding);
+    }
+
+    .navbar-container {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: var(--space-8);
+      max-width: var(--container-max);
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      flex-shrink: 0;
+      justify-self: start;
+    }
+
+    .navbar-logo {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .navbar-menu {
+      display: none;
+      gap: var(--space-8);
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (min-width: 768px) {
+      .navbar-menu {
+        display: flex;
+      }
+    }
+
+    .navbar-link {
+      color: var(--color-text-primary);
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-medium);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-base);
+      transition: all var(--transition-base) ease;
+      position: relative;
+    }
+
+    .navbar-link:hover,
+    .navbar-link.active {
+      color: var(--color-text-primary);
+      background: transparent;
+    }
+
+    /* Dropdown - 100% Opaque */
+    .navbar-dropdown {
+      position: relative;
+    }
+
+    .dropdown-trigger {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      background: none;
+    }
+
+    .dropdown-trigger::after {
+      content: '▾';
+      font-size: var(--font-size-xs);
+      transition: transform var(--transition-base) ease;
+    }
+
+    .navbar-dropdown:hover .dropdown-trigger::after {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + var(--space-2));
+      left: 0;
+      background: rgb(42, 42, 42);
+      backdrop-filter: blur(12px);
+      border-radius: var(--radius-base);
+      padding: var(--space-2);
+      min-width: 150px;
+      box-shadow: var(--shadow-lg);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all var(--transition-base) ease;
+    }
+
+    .navbar-dropdown:hover .dropdown-menu,
+    .navbar-dropdown:focus-within .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-item {
+      display: block;
+      padding: var(--space-2) var(--space-3);
+      color: var(--color-text-primary);
+      border-radius: var(--radius-base);
+      transition: all var(--transition-base) ease;
+    }
+
+    .dropdown-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar-cta-wrapper {
+      justify-self: end;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-cta {
+      flex-shrink: 0;
+    }
+
+    .shopify-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+      display: block;
+      background: transparent;
+      color: var(--color-text-primary);
+      font-size: var(--font-size-2xl);
+      padding: var(--space-2);
+      justify-self: end;
+    }
+
+    @media (min-width: 768px) {
+      .mobile-menu-toggle {
+        display: none;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .navbar-container {
+        grid-template-columns: 1fr auto;
+      }
+
+      .navbar-menu {
+        position: fixed;
+        top: 73px;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(12px);
+        flex-direction: column;
+        padding: var(--space-6);
+        gap: var(--space-4);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all var(--transition-slow) ease;
+        width: 100vw;
+      }
+
+      .navbar-menu.active {
+        display: flex;
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .dropdown-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        margin-top: var(--space-2);
+      }
+
+      .navbar-cta-wrapper {
+        grid-column: 1 / -1;
+        justify-self: center;
+        margin-top: var(--space-4);
+      }
+    }
+
+    /* ============================================================
+       HERO SECTION
+       ============================================================ */
+    .hero {
+      padding: var(--space-24) 0 var(--space-16);
+      position: relative;
+      width: 100%;
+    }
+
+    .hero-content {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto var(--space-12);
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: rgba(255, 255, 255, 0.1);
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-pill);
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--space-6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .shopify-logo {
+      height: 24px;
+      width: auto;
+    }
+
+    .hero-headline {
+      font-size: var(--font-size-6xl);
+      font-weight: var(--font-weight-bold);
+      line-height: var(--line-height-tight);
+      letter-spacing: -0.02em;
+      margin-bottom: var(--space-6);
+      color: var(--color-text-primary);
+    }
+
+    /* NEON HIGHLIGHT - 100% OPAQUE */
+    .highlight {
+      position: relative;
+      display: inline-block;
+      z-index: 1;
+    }
+
+    .highlight::before {
+      content: '';
+      position: absolute;
+      bottom: 0.1em;
+      left: 0;
+      width: 0%;
+      height: 0.4em;
+      background: var(--color-highlight);
+      z-index: -1;
+      opacity: 1;
+      box-shadow: var(--glow-highlight);
+      animation: highlightSweep 1s ease-out forwards;
+      border-radius: 2px;
+    }
+
+    @keyframes highlightSweep {
+      0% {
+        width: 0%;
+      }
+      100% {
+        width: 100%;
+      }
+    }
+
+    .hero-subtitle {
+      font-size: var(--font-size-xl);
+      color: var(--color-text-secondary);
+      line-height: var(--line-height-relaxed);
+      margin-bottom: var(--space-8);
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .hero-cta-secondary {
+      font-size: var(--font-size-base);
+      color: var(--color-text-secondary);
+    }
+
+    .hero-cta-secondary a {
+      color: var(--color-text-primary);
+      font-weight: var(--font-weight-bold);
+      text-decoration: underline;
+      transition: color var(--transition-base) ease;
+    }
+
+    .hero-cta-secondary a:hover {
+      color: var(--color-accent-400);
+    }
+
+    /* VIDEO - 620px HEIGHT */
+    .hero-video-container {
+      max-width: 1000px;
+      margin: 0 auto var(--space-12);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+      position: relative;
+      width: 100%;
+      height: 620px;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    @media (max-width: 768px) {
+      .hero-video-container {
+        height: clamp(300px, 60vw, 500px);
+      }
+    }
+
+    .hero-video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Logo Carousel */
+    .logo-carousel-wrapper {
+      margin-bottom: var(--space-8);
+      overflow: hidden;
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      width: 100%;
+    }
+
+    .logo-carousel {
+      display: flex;
+      gap: var(--space-12);
+      animation: scroll 40s linear infinite;
+      width: fit-content;
+    }
+
+    .logo-carousel:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .logo-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 60px;
+      padding: 0 var(--space-6);
+      flex-shrink: 0;
+    }
+
+    .logo-item img {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    /* SUCCESS STORIES BUTTON - CENTERED */
+    .hero-secondary-cta {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: var(--space-12) 0 var(--space-8);
+      }
+    }
+
+    /* ============================================================
+       FEATURES SECTION - CLOCKWISE ROTATION
+       ============================================================ */
+    .features-section {
+      padding: var(--space-24) 0;
+      width: 100%;
+    }
+
+    .bento-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+      width: 100%;
+    }
+
+    @media (min-width: 768px) {
+      .bento-container {
+        grid-template-columns: 70% 30%;
+        min-height: 850px;
+      }
+    }
+
+    .main-feature-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
+      min-height: 400px;
+    }
+
+    @media (min-width: 768px) {
+      .main-feature-card {
+        min-height: 100%;
+      }
+    }
+
+    .main-feature-screenshot {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+      border-radius: var(--radius-base);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-lg);
+      min-height: 300px;
+      margin-top: var(--space-6);
+    }
+
+    .side-features {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+
+    .feature-card-small {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .feature-card-small:hover {
+      transform: translate3d(0, -2px, 0);
+      border-color: var(--color-accent-400);
+    }
+
+    .feature-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-bold);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-pill);
+      margin-bottom: var(--space-3);
+      width: fit-content;
+    }
+
+    .tag-price-test {
+      background: rgba(172, 255, 23, 0.1);
+      color: var(--color-accent-400);
+    }
+
+    .tag-url-redirect {
+      background: rgba(255, 95, 71, 0.1);
+      color: #FF5F47;
+    }
+
+    .tag-shipping {
+      background: rgba(63, 180, 232, 0.1);
+      color: var(--color-primary-400);
+    }
+
+    .tag-theme {
+      background: rgba(255, 0, 155, 0.1);
+      color: #FF009B;
+    }
+
+    .tag-checkout {
+      background: rgba(255, 171, 214, 0.1);
+      color: #FFABD6;
+    }
+
+    .feature-card-small h4 {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-bold);
+      margin-bottom: var(--space-2);
+      line-height: var(--line-height-tight);
+    }
+
+    .feature-card-small p {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+      line-height: var(--line-height-normal);
+    }
+
+    .main-feature-card h3 {
+      font-size: var(--font-size-3xl);
+      font-weight: var(--font-weight-bold);
+      margin-bottom: var(--space-3);
+      line-height: var(--line-height-tight);
+    }
+
+    .main-feature-card p {
+      font-size: var(--font-size-base);
+      color: var(--color-text-secondary);
+      line-height: var(--line-height-relaxed);
+      margin-bottom: var(--space-6);
+    }
+
+    @media (max-width: 767px) {
+      .side-features {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .side-features {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ============================================================
+       TESTIMONIALS
+       ============================================================ */
+    .testimonials-section {
+      padding: var(--space-24) 0;
+      background: var(--color-black);
+      width: 100%;
+    }
+
+    .stats-row {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-16);
+      margin-bottom: var(--space-16);
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: var(--font-size-5xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-text-primary);
+      line-height: 1;
+      margin-bottom: var(--space-2);
+    }
+
+    .stat-label {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+    }
+
+    .testimonial-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-12);
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .testimonial-content {
+        grid-template-columns: 1.2fr 1fr;
+      }
+    }
+
+    .testimonial-video {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      border-radius: 50%;
+      box-shadow: var(--shadow-lg);
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* NO BORDER ON QUOTE CARD */
+    .testimonial-quote-card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: var(--space-8);
+      border-radius: var(--radius-lg);
+      border: none;
+      backdrop-filter: blur(10px);
+    }
+
+    .testimonial-quote {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--line-height-relaxed);
+      margin-bottom: var(--space-6);
+      color: var(--color-text-primary);
+    }
+
+    .testimonial-author {
+      font-size: var(--font-size-base);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-6);
+    }
+
+    .testimonial-author strong {
+      color: var(--color-text-primary);
+      display: block;
+      margin-bottom: var(--space-1);
+    }
+
+    /* RIGHT ALIGN BUTTON */
+    .testimonial-cta-wrapper {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    /* ============================================================
+       INTEGRATIONS - NETWORK ANIMATION
+       ============================================================ */
+    .integrations-section {
+      padding: var(--space-24) 0;
+      width: 100%;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: var(--space-12);
+    }
+
+    .section-header h2 {
+      font-size: var(--font-size-5xl);
+      font-weight: var(--font-weight-bold);
+      line-height: var(--line-height-tight);
+      margin-bottom: var(--space-4);
+    }
+
+    .integrations-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-12);
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .integrations-container {
+        grid-template-columns: 2fr 1fr;
+      }
+    }
+
+    .network-diagram {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .network-svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .integration-node {
+      fill: rgba(255, 255, 255, 0.1);
+      stroke: var(--color-accent-400);
+      stroke-width: 2;
+      transition: all 0.3s ease;
+    }
+
+    .integration-node:hover {
+      fill: rgba(172, 255, 23, 0.2);
+      stroke-width: 3;
+    }
+
+    .integration-line {
+      stroke: var(--color-accent-400);
+      stroke-width: 2;
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: drawLine 2s ease-out forwards;
+    }
+
+    @keyframes drawLine {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    .integration-line:nth-child(1) { animation-delay: 0s; }
+    .integration-line:nth-child(2) { animation-delay: 0.2s; }
+    .integration-line:nth-child(3) { animation-delay: 0.4s; }
+    .integration-line:nth-child(4) { animation-delay: 0.6s; }
+    .integration-line:nth-child(5) { animation-delay: 0.8s; }
+
+    .integration-text {
+      fill: var(--color-text-primary);
+      font-size: 14px;
+      font-weight: var(--font-weight-medium);
+      text-anchor: middle;
+    }
+
+    .integration-cta {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* ============================================================
+       CTA SECTION
+       ============================================================ */
+    .get-started-section {
+      padding: var(--space-32) 0;
+      text-align: center;
+      background: var(--color-black);
+      width: 100%;
+    }
+
+    .get-started-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .get-started-content h2 {
+      font-size: var(--font-size-5xl);
+      font-weight: var(--font-weight-bold);
+      line-height: var(--line-height-tight);
+      margin-bottom: var(--space-4);
+    }
+
+    .get-started-subheading {
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-8);
+    }
+
+    .get-started-cta-group {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .footer {
+      background: var(--color-black);
+      padding: var(--space-12) 0 var(--space-6);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      width: 100%;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-12);
+    }
+
+    @media (min-width: 768px) {
+      .footer-container {
+        grid-template-columns: 1fr 2fr;
+        gap: var(--space-24);
+      }
+    }
+
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+
+    .footer-logo {
+      height: 40px;
+      width: auto;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: var(--space-4);
+    }
+
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-base);
+      transition: all var(--transition-base) ease;
+    }
+
+    .social-icon:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .social-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--color-text-primary);
+    }
+
+    .footer-right {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-8);
+    }
+
+    .footer-column h4 {
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-4);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .footer-link {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
+      transition: color var(--transition-base) ease;
+    }
+
+    .footer-link:hover {
+      color: var(--color-accent-400);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION - CENTERED MENU
+       ============================================================ -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="navbar-container">
+      <a href="/" class="navbar-brand" aria-label="ABConvert Home">
+        <img src="./assets/images/abconvert-logo-white.png" alt="ABConvert" class="navbar-logo">
+      </a>
+
+      <ul class="navbar-menu" id="navbar-menu">
+        <li><a href="#pricing" class="navbar-link">Pricing</a></li>
+        <li><a href="#success-stories" class="navbar-link">Success Stories</a></li>
+        <li><a href="#partnership" class="navbar-link">Partnership</a></li>
+        <li class="navbar-dropdown">
+          <button class="navbar-link dropdown-trigger active" aria-haspopup="true" aria-expanded="false">
+            Resources
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#blog" class="dropdown-item" role="menuitem">Blog</a></li>
+            <li><a href="#help" class="dropdown-item" role="menuitem">Help</a></li>
+            <li><a href="#docs" class="dropdown-item" role="menuitem">Docs</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="navbar-cta-wrapper">
+        <a href="#free-trial" class="navbar-cta btn btn-dark">
+          <svg class="shopify-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M16.7 5.3c-.1-.1-2.2-.2-2.2-.2s-1.4-1.4-1.6-1.6c-.2-.2-.6-.1-.7 0l-1 .3c-.3-.9-.9-1.8-1.8-1.8h-.3C8.6 1.3 8 .9 7.5.9c-3.4 0-5 4.2-5.5 6.3-1.4.4-2.4.8-2.5.8-.8.3-.8.3-.9 1-.1.5-2.1 16.2-2.1 16.2L13.3 27l9.2-2.1S16.9 5.5 16.7 5.3zm-3.3-.9l-1.4.4c0-.9-.2-2-.7-3 .8.1 1.6 1.5 2.1 2.6zM11 2.5c.4 0 .7.2 1 .5-.6 1-1.2 2.2-1.7 4.5L8 8.2c.5-2.2 1.7-5.7 3-5.7zm-2.6.3c.1.5.2 1 .2 1.6 0 .9-.1 1.8-.3 2.7L6.5 7.8c.8-2.4 1.5-4.4 1.9-5z"/>
+          </svg>
+          Free trial
+        </a>
+      </div>
+
+      <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" id="mobile-menu-btn">
+        ☰
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       HERO SECTION
+       ============================================================ -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-pill" role="status" aria-label="Built for Shopify brands">
+          <span>Built for</span>
+          <img src="./assets/images/shopify-logo-white.png" alt="Shopify" class="shopify-logo">
+        </div>
+
+        <h1 class="hero-headline">
+          Streamlined A/B testing for <span class="highlight">scaling</span> Shopify brands.
+        </h1>
+
+        <p class="hero-subtitle">
+          Intuitive to run. Decision-grade to trust. Priced for growing teams.
+        </p>
+
+        <div class="hero-cta-group">
+          <button class="btn btn-primary btn-large" onclick="window.location.href='#free-trial'">
+            <strong>Start 14 day free trial</strong>
+          </button>
+          <p class="hero-cta-secondary">
+            Prefer to talk to the expert? <a href="#book-demo">Book a Demo</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- YouTube Video Embed - 620px height -->
+      <div class="hero-video-container" id="hero-video-container">
+        <iframe
+          id="hero-video"
+          src="https://www.youtube.com/embed/zxWG17zvuEA?enablejsapi=1&mute=1&autoplay=1&controls=1&rel=0"
+          title="ABConvert Product Demo"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+
+      <!-- Logo Carousel -->
+      <div class="logo-carousel-wrapper" aria-label="Trusted by leading brands">
+        <div class="logo-carousel">
+          <div class="logo-item">
+            <img src="./assets/images/vanquish-logo.png" alt="Vanquish Fitness">
+          </div>
+          <div class="logo-item">
+            <img src="./assets/images/kompsos-logo.png" alt="Kompsos">
+          </div>
+          <div class="logo-item">
+            <img src="./assets/images/edikted-logo.png" alt="Edikted">
+          </div>
+          <div class="logo-item">
+            <img src="./assets/images/fum-logo.png" alt="FÜM">
+          </div>
+          <div class="logo-item">
+            <img src="./assets/images/brand-logo.png" alt="Brand">
+          </div>
+          <!-- Duplicate for infinite scroll -->
+          <div class="logo-item">
+            <img src="./assets/images/vanquish-logo.png" alt="Vanquish Fitness">
+          </div>
+          <div class="logo-item">
+            <img src="./assets/images/kompsos-logo.png" alt="Kompsos">
+          </div>
+          <div class="logo-item">
+            <img src="./assets/images/edikted-logo.png" alt="Edikted">
+          </div>
+          <div class="logo-item">
+            <img src="./assets/images/fum-logo.png" alt="FÜM">
+          </div>
+          <div class="logo-item">
+            <img src="./assets/images/brand-logo.png" alt="Brand">
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-secondary-cta">
+        <button class="btn btn-secondary" onclick="window.location.href='#success-stories'">
+          Success stories
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PRODUCT FEATURES (CLOCKWISE ROTATION)
+       ============================================================ -->
+  <section class="features-section" id="features">
+    <div class="container">
+      <div class="bento-container">
+        <!-- Main Feature Card (Left) -->
+        <div class="main-feature-card" id="main-feature">
+          <span class="feature-tag tag-price-test" id="main-tag">💰 Price Test</span>
+          <h3 id="main-title">Find Your Sweet Spot for Profit.</h3>
+          <p id="main-description">Discover which price drives the most sales and keeps your margins strong.</p>
+          <div class="main-feature-screenshot">
+            Product Screenshot
+          </div>
+        </div>
+
+        <!-- Side Feature Cards (Right) -->
+        <div class="side-features" id="side-features">
+          <div class="feature-card-small" data-feature="url">
+            <span class="feature-tag tag-url-redirect">🔀 URL Test</span>
+            <h4>Send Shoppers to the Page That Converts.</h4>
+            <p>Compare landing pages or product URLs to see which one truly sells.</p>
+          </div>
+
+          <div class="feature-card-small" data-feature="shipping">
+            <span class="feature-tag tag-shipping">📦 Shipping Test</span>
+            <h4>Turn Shipping Into a Sales Boost.</h4>
+            <p>Find the perfect shipping offer like "Free over $50" that lifts order value and conversion.</p>
+          </div>
+
+          <div class="feature-card-small" data-feature="theme">
+            <span class="feature-tag tag-theme">👁️ Template & Theme Test</span>
+            <h4>Design That Drives Action.</h4>
+            <p>Test different store themes to see which layout makes shoppers click and buy more.</p>
+          </div>
+
+          <div class="feature-card-small" data-feature="checkout">
+            <span class="feature-tag tag-checkout">✅ Checkout Test</span>
+            <h4>Stop Losing Sales at the Finish Line.</h4>
+            <p>Simplify your checkout flow and see which version gets more shoppers to complete their purchase.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TESTIMONIALS
+       ============================================================ -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="container">
+      <!-- Stats Row -->
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-value">1200+</div>
+          <div class="stat-label">Trusted by stores</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">$2.0B</div>
+          <div class="stat-label">in GMV</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">4.8★</div>
+          <div class="stat-label">Built for Shopify</div>
+        </div>
+      </div>
+
+      <!-- Testimonial Content -->
+      <div class="testimonial-content">
+        <video
+          class="testimonial-video"
+          controls
+          poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Crect fill='%23000000' width='640' height='640'/%3E%3Ccircle cx='320' cy='320' r='280' fill='%23191919'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23868E96' font-family='Roboto' font-size='20'%3ETestimonial Video%3C/text%3E%3C/svg%3E"
+          aria-label="Customer testimonial video"
+        >
+          <source src="#" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+
+        <div class="testimonial-quote-card">
+          <blockquote class="testimonial-quote">
+            "A/B testing that finally respects how Shopify teams work."
+          </blockquote>
+          <div class="testimonial-author">
+            <strong>Jane Doe</strong>
+            Growth Lead at Northline
+          </div>
+          <div class="testimonial-cta-wrapper">
+            <button class="btn btn-primary" onclick="window.location.href='#free-trial'">
+              Try on Shopify
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       INTEGRATIONS SECTION - NETWORK DIAGRAM
+       ============================================================ -->
+  <section class="integrations-section" id="integrations">
+    <div class="container">
+      <div class="section-header">
+        <h2>Work seamless with your existing tech stack</h2>
+      </div>
+
+      <div class="integrations-container">
+        <!-- Network Diagram -->
+        <div class="network-diagram">
+          <svg class="network-svg" viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg">
+            <!-- Lines (drawn with animation) -->
+            <line class="integration-line" x1="300" y1="250" x2="150" y2="100" />
+            <line class="integration-line" x1="300" y1="250" x2="450" y2="100" />
+            <line class="integration-line" x1="300" y1="250" x2="500" y2="300" />
+            <line class="integration-line" x1="300" y1="250" x2="400" y2="420" />
+            <line class="integration-line" x1="300" y1="250" x2="100" y2="380" />
+
+            <!-- Center Node (ABConvert) -->
+            <circle class="integration-node" cx="300" cy="250" r="60" />
+            <text class="integration-text" x="300" y="255">ABConvert</text>
+
+            <!-- Integration Nodes -->
+            <circle class="integration-node" cx="150" cy="100" r="45" />
+            <text class="integration-text" x="150" y="100" font-size="11">Kaching</text>
+            <text class="integration-text" x="150" y="112" font-size="11">Bundle</text>
+
+            <circle class="integration-node" cx="450" cy="100" r="45" />
+            <text class="integration-text" x="450" y="105">Vitals</text>
+
+            <circle class="integration-node" cx="500" cy="300" r="45" />
+            <text class="integration-text" x="500" y="305">Bundler</text>
+
+            <circle class="integration-node" cx="400" cy="420" r="45" />
+            <text class="integration-text" x="400" y="425">Rebuy</text>
+
+            <circle class="integration-node" cx="100" cy="380" r="45" />
+            <text class="integration-text" x="100" y="380" font-size="11">Swatch</text>
+            <text class="integration-text" x="100" y="392" font-size="11">King</text>
+          </svg>
+        </div>
+
+        <!-- Browse Integrations Button -->
+        <div class="integration-cta">
+          <button class="btn btn-tertiary btn-large">
+            Browse Integrations
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       GET STARTED SECTION
+       ============================================================ -->
+  <section class="get-started-section" id="get-started">
+    <div class="container">
+      <div class="get-started-content">
+        <h2>Decision-ready results you can act on</h2>
+        <p class="get-started-subheading">No design/dev sprints required.</p>
+
+        <div class="get-started-cta-group">
+          <button class="btn btn-primary btn-large" onclick="window.location.href='#free-trial'">
+            <strong>Run your first test in 7 days</strong>
+          </button>
+          <button class="btn btn-tertiary btn-large" onclick="window.location.href='#book-demo'">
+            Talk to our expert
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-container">
+        <!-- Left Side -->
+        <div class="footer-left">
+          <img src="./assets/images/abconvert-logo-white.png" alt="ABConvert" class="footer-logo">
+          <div class="footer-social">
+            <!-- X/Twitter Icon -->
+            <a href="#" class="social-icon" aria-label="X (Twitter)">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <!-- LinkedIn Icon -->
+            <a href="#" class="social-icon" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Side - Two Columns -->
+        <div class="footer-right">
+          <!-- Column 1 - Product -->
+          <div class="footer-column">
+            <h4>Product</h4>
+            <div class="footer-links">
+              <a href="#pricing" class="footer-link">Pricing</a>
+              <a href="#success-stories" class="footer-link">Success Stories</a>
+              <a href="#partnership" class="footer-link">Partnership</a>
+            </div>
+          </div>
+
+          <!-- Column 2 - Resource -->
+          <div class="footer-column">
+            <h4>Resource</h4>
+            <div class="footer-links">
+              <a href="#blog" class="footer-link">Blog</a>
+              <a href="#help" class="footer-link">Help</a>
+              <a href="#guideline" class="footer-link">Guideline</a>
+              <a href="#docs" class="footer-link">Doc</a>
+              <a href="#terms" class="footer-link">Terms of Service</a>
+              <a href="#privacy" class="footer-link">Privacy Policy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+       ============================================================ -->
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const navbarMenu = document.getElementById('navbar-menu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      navbarMenu.classList.toggle('active');
+      const isExpanded = navbarMenu.classList.contains('active');
+      mobileMenuBtn.setAttribute('aria-expanded', isExpanded);
+    });
+
+    // ============================================================
+    // Feature Cards - Clockwise Rotation
+    // ============================================================
+    const featureCards = document.querySelectorAll('.feature-card-small');
+    const mainFeature = document.getElementById('main-feature');
+    const mainTag = document.getElementById('main-tag');
+    const mainTitle = document.getElementById('main-title');
+    const mainDescription = document.getElementById('main-description');
+
+    // Store current main feature data
+    let mainData = {
+      tag: mainTag.outerHTML,
+      title: mainTitle.textContent,
+      description: mainDescription.textContent
+    };
+
+    featureCards.forEach((card) => {
+      card.addEventListener('click', () => {
+        // Get clicked card data
+        const clickedTag = card.querySelector('.feature-tag').outerHTML;
+        const clickedTitle = card.querySelector('h4').textContent;
+        const clickedDescription = card.querySelector('p').textContent;
+
+        // Animate main card (fade out, update, fade in)
+        mainFeature.style.opacity = '0.5';
+
+        setTimeout(() => {
+          // Update main card with clicked card data
+          mainTag.outerHTML = clickedTag;
+          mainTitle.textContent = clickedTitle;
+          mainDescription.textContent = clickedDescription;
+
+          // Update the clicked card with old main data
+          card.querySelector('.feature-tag').outerHTML = mainData.tag;
+          card.querySelector('h4').textContent = mainData.title;
+          card.querySelector('p').textContent = mainData.description;
+
+          // Store new main data
+          mainData = {
+            tag: clickedTag,
+            title: clickedTitle,
+            description: clickedDescription
+          };
+
+          // Rotate cards clockwise (move clicked card to end)
+          const sideFeatures = document.getElementById('side-features');
+          sideFeatures.appendChild(card);
+
+          // Fade back in
+          mainFeature.style.opacity = '1';
+
+          // Update references
+          document.getElementById('main-tag');
+          document.getElementById('main-title');
+          document.getElementById('main-description');
+        }, 250);
+      });
+    });
+
+    // ============================================================
+    // Hero Video Autoplay/Pause
+    // ============================================================
+    let player;
+    let isYouTubeAPIReady = false;
+
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    window.onYouTubeIframeAPIReady = function() {
+      player = new YT.Player('hero-video', {
+        events: {
+          'onReady': onPlayerReady
+        }
+      });
+      isYouTubeAPIReady = true;
+    };
+
+    function onPlayerReady(event) {
+      const videoContainer = document.getElementById('hero-video-container');
+
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5
+      };
+
+      const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (player && player.playVideo) {
+              player.playVideo();
+            }
+          } else {
+            if (player && player.pauseVideo) {
+              player.pauseVideo();
+            }
+          }
+        });
+      }, observerOptions);
+
+      videoObserver.observe(videoContainer);
+    }
+
+    // ============================================================
+    // Dropdown Menu
+    // ============================================================
+    const dropdownTrigger = document.querySelector('.dropdown-trigger');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+
+    if (dropdownTrigger && dropdownMenu) {
+      dropdownTrigger.addEventListener('click', () => {
+        const isExpanded = dropdownTrigger.getAttribute('aria-expanded') === 'true';
+        dropdownTrigger.setAttribute('aria-expanded', !isExpanded);
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.navbar-dropdown')) {
+          dropdownTrigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      dropdownTrigger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const isExpanded = dropdownTrigger.getAttribute('aria-expanded') === 'true';
+          dropdownTrigger.setAttribute('aria-expanded', !isExpanded);
+          if (!isExpanded) {
+            setTimeout(() => {
+              const firstItem = dropdownMenu.querySelector('.dropdown-item');
+              if (firstItem) firstItem.focus();
+            }, 100);
+          }
+        } else if (e.key === 'Escape') {
+          dropdownTrigger.setAttribute('aria-expanded', 'false');
+          dropdownTrigger.focus();
+        }
+      });
+
+      const dropdownItems = dropdownMenu.querySelectorAll('.dropdown-item');
+      dropdownItems.forEach((item, index) => {
+        item.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            const nextIndex = (index + 1) % dropdownItems.length;
+            dropdownItems[nextIndex].focus();
+          } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            const prevIndex = (index - 1 + dropdownItems.length) % dropdownItems.length;
+            dropdownItems[prevIndex].focus();
+          } else if (e.key === 'Escape') {
+            dropdownTrigger.setAttribute('aria-expanded', 'false');
+            dropdownTrigger.focus();
+          }
+        });
+      });
+    }
+
+    // ============================================================
+    // Smooth Scroll
+    // ============================================================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    console.log('ABConvert Hero Redesign loaded successfully!');
+  </script>
+
+</body>
+</html>
