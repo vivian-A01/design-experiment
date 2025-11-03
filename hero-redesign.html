@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ABConvert - Streamlined A/B Testing for Shopify Brands</title>
 
   <!-- Google Fonts: Roboto -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet">
 
   <style>
     /* ============================================================
@@ -922,16 +921,10 @@
     .network-diagram {
       position: relative;
       width: 100%;
-      height: 600px;
+      height: 500px;
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    @media (max-width: 768px) {
-      .network-diagram {
-        height: 500px;
-      }
     }
 
     .network-svg {
@@ -944,19 +937,6 @@
       stroke: var(--color-accent-400);
       stroke-width: 2;
       transition: all 0.3s ease;
-      opacity: 0;
-      animation: fadeInNode 0.6s ease-out forwards;
-    }
-
-    @keyframes fadeInNode {
-      from {
-        opacity: 0;
-        transform: scale(0.8);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
     }
 
     .integration-node:hover {
@@ -964,19 +944,12 @@
       stroke-width: 3;
     }
 
-    .integration-node-center {
-      fill: rgba(172, 255, 23, 0.15);
-      stroke: var(--color-accent-400);
-      stroke-width: 3;
-    }
-
     .integration-line {
       stroke: var(--color-accent-400);
-      stroke-width: 1.5;
-      opacity: 0.4;
+      stroke-width: 2;
       stroke-dasharray: 1000;
       stroke-dashoffset: 1000;
-      animation: drawLine 1.5s ease-out forwards;
+      animation: drawLine 2s ease-out forwards;
     }
 
     @keyframes drawLine {
@@ -986,62 +959,17 @@
     }
 
     .integration-line:nth-child(1) { animation-delay: 0s; }
-    .integration-line:nth-child(2) { animation-delay: 0.08s; }
-    .integration-line:nth-child(3) { animation-delay: 0.16s; }
-    .integration-line:nth-child(4) { animation-delay: 0.24s; }
-    .integration-line:nth-child(5) { animation-delay: 0.32s; }
-    .integration-line:nth-child(6) { animation-delay: 0.4s; }
-    .integration-line:nth-child(7) { animation-delay: 0.48s; }
-    .integration-line:nth-child(8) { animation-delay: 0.56s; }
-    .integration-line:nth-child(9) { animation-delay: 0.64s; }
-    .integration-line:nth-child(10) { animation-delay: 0.72s; }
-    .integration-line:nth-child(11) { animation-delay: 0.8s; }
-    .integration-line:nth-child(12) { animation-delay: 0.88s; }
-
-    .integration-node:nth-child(13) { animation-delay: 0s; }
-    .integration-node:nth-child(14) { animation-delay: 0.08s; }
-    .integration-node:nth-child(15) { animation-delay: 0.16s; }
-    .integration-node:nth-child(16) { animation-delay: 0.24s; }
-    .integration-node:nth-child(17) { animation-delay: 0.32s; }
-    .integration-node:nth-child(18) { animation-delay: 0.4s; }
-    .integration-node:nth-child(19) { animation-delay: 0.48s; }
-    .integration-node:nth-child(20) { animation-delay: 0.56s; }
-    .integration-node:nth-child(21) { animation-delay: 0.64s; }
-    .integration-node:nth-child(22) { animation-delay: 0.72s; }
-    .integration-node:nth-child(23) { animation-delay: 0.8s; }
-    .integration-node:nth-child(24) { animation-delay: 0.88s; }
+    .integration-line:nth-child(2) { animation-delay: 0.2s; }
+    .integration-line:nth-child(3) { animation-delay: 0.4s; }
+    .integration-line:nth-child(4) { animation-delay: 0.6s; }
+    .integration-line:nth-child(5) { animation-delay: 0.8s; }
 
     .integration-text {
       fill: var(--color-text-primary);
-      font-size: 12px;
+      font-size: 14px;
       font-weight: var(--font-weight-medium);
       text-anchor: middle;
-      opacity: 0;
-      animation: fadeInText 0.6s ease-out forwards;
     }
-
-    @keyframes fadeInText {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-
-    .integration-text:nth-child(25) { animation-delay: 0.1s; }
-    .integration-text:nth-child(26) { animation-delay: 0.18s; }
-    .integration-text:nth-child(27) { animation-delay: 0.26s; }
-    .integration-text:nth-child(28) { animation-delay: 0.34s; }
-    .integration-text:nth-child(29) { animation-delay: 0.42s; }
-    .integration-text:nth-child(30) { animation-delay: 0.5s; }
-    .integration-text:nth-child(31) { animation-delay: 0.58s; }
-    .integration-text:nth-child(32) { animation-delay: 0.66s; }
-    .integration-text:nth-child(33) { animation-delay: 0.74s; }
-    .integration-text:nth-child(34) { animation-delay: 0.82s; }
-    .integration-text:nth-child(35) { animation-delay: 0.9s; }
-    .integration-text:nth-child(36) { animation-delay: 0.98s; }
-    .integration-text:nth-child(37) { animation-delay: 0.05s; }
 
     .integration-cta {
       display: flex;
@@ -1069,14 +997,6 @@
       font-weight: var(--font-weight-bold);
       line-height: var(--line-height-tight);
       margin-bottom: var(--space-4);
-      white-space: nowrap;
-    }
-
-    @media (max-width: 768px) {
-      .get-started-content h2 {
-        white-space: normal;
-        font-size: var(--font-size-3xl);
-      }
     }
 
     .get-started-subheading {
@@ -1257,13 +1177,7 @@
 
       <!-- YouTube Video Embed - 620px height -->
       <div class="hero-video-container" id="hero-video-container">
-        <iframe
-          id="hero-video"
-          src="https://www.youtube.com/embed/zxWG17zvuEA?enablejsapi=1&mute=1&autoplay=1&controls=1&rel=0"
-          title="ABConvert Product Demo"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
+        <iframe id="hero-video" src="https://www.youtube.com/embed/zxWG17zvuEA?enablejsapi=1&amp;mute=1&amp;autoplay=1&amp;controls=1&amp;rel=0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
       </div>
 
       <!-- Logo Carousel -->
@@ -1318,10 +1232,10 @@
     <div class="container">
       <div class="bento-container">
         <!-- Main Feature Card (Left) -->
-        <div class="main-feature-card" id="main-feature">
-          <span class="feature-tag tag-price-test" id="main-tag">💰 Price Test</span>
-          <h3 id="main-title">Find Your Sweet Spot for Profit.</h3>
-          <p id="main-description">Discover which price drives the most sales and keeps your margins strong.</p>
+        <div class="main-feature-card" id="main-feature" style="opacity: 1;">
+          <span class="feature-tag tag-shipping" id="main-tag">📦 Shipping Test</span>
+          <h3 id="main-title">Turn Shipping Into a Sales Boost.</h3>
+          <p id="main-description">Find the perfect shipping offer like "Free over $50" that lifts order value and conversion.</p>
           <div class="main-feature-screenshot">
             Product Screenshot
           </div>
@@ -1335,10 +1249,10 @@
             <p>Compare landing pages or product URLs to see which one truly sells.</p>
           </div>
 
-          <div class="feature-card-small" data-feature="shipping">
-            <span class="feature-tag tag-shipping">📦 Shipping Test</span>
-            <h4>Turn Shipping Into a Sales Boost.</h4>
-            <p>Find the perfect shipping offer like "Free over $50" that lifts order value and conversion.</p>
+          <div class="feature-card-small" data-feature="price">
+            <span class="feature-tag tag-price-test">💰 Price Test</span>
+            <h4>Find Your Sweet Spot for Profit.</h4>
+            <p>Discover which price drives the most sales and keeps your margins strong.</p>
           </div>
 
           <div class="feature-card-small" data-feature="theme">
@@ -1380,12 +1294,7 @@
 
       <!-- Testimonial Content -->
       <div class="testimonial-content">
-        <video
-          class="testimonial-video"
-          controls
-          poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Crect fill='%23000000' width='640' height='640'/%3E%3Ccircle cx='320' cy='320' r='280' fill='%23191919'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23868E96' font-family='Roboto' font-size='20'%3ETestimonial Video%3C/text%3E%3C/svg%3E"
-          aria-label="Customer testimonial video"
-        >
+        <video class="testimonial-video" controls="" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Crect fill='%23000000' width='640' height='640'/%3E%3Ccircle cx='320' cy='320' r='280' fill='%23191919'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23868E96' font-family='Roboto' font-size='20'%3ETestimonial Video%3C/text%3E%3C/svg%3E" aria-label="Customer testimonial video">
           <source src="#" type="video/mp4">
           Your browser does not support the video tag.
         </video>
@@ -1409,7 +1318,7 @@
   </section>
 
   <!-- ============================================================
-       INTEGRATIONS SECTION
+       INTEGRATIONS SECTION - NETWORK DIAGRAM
        ============================================================ -->
   <section class="integrations-section" id="integrations">
     <div class="container">
@@ -1417,80 +1326,46 @@
         <h2>Work seamless with your existing tech stack</h2>
       </div>
 
-      <div class="integrations-grid">
-        <div class="integration-card float">
-          <div class="integration-icon" aria-hidden="true">S</div>
-          <div class="integration-name">Shopify</div>
-        </div>
-        <div class="integration-card">
-          <div class="integration-icon" aria-hidden="true">GA</div>
-          <div class="integration-name">Google Analytics</div>
-        </div>
-        <div class="integration-card float">
-          <div class="integration-icon" aria-hidden="true">SG</div>
-          <div class="integration-name">Segment</div>
-        </div>
-        <div class="integration-card">
-          <div class="integration-icon" aria-hidden="true">KL</div>
-          <div class="integration-name">Klaviyo</div>
-        </div>
-        <div class="integration-card float">
-          <div class="integration-icon" aria-hidden="true">MP</div>
-          <div class="integration-name">Mixpanel</div>
-        </div>
-        <div class="integration-card">
-          <div class="integration-icon" aria-hidden="true">FB</div>
-          <div class="integration-name">Facebook Ads</div>
+      <div class="integrations-container">
+        <!-- Network Diagram -->
+        <div class="network-diagram">
+          <svg class="network-svg" viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg">
+            <!-- Lines (drawn with animation) -->
+            <line class="integration-line" x1="300" y1="250" x2="150" y2="100"></line>
+            <line class="integration-line" x1="300" y1="250" x2="450" y2="100"></line>
+            <line class="integration-line" x1="300" y1="250" x2="500" y2="300"></line>
+            <line class="integration-line" x1="300" y1="250" x2="400" y2="420"></line>
+            <line class="integration-line" x1="300" y1="250" x2="100" y2="380"></line>
+
+            <!-- Center Node (ABConvert) -->
+            <circle class="integration-node" cx="300" cy="250" r="60"></circle>
+            <text class="integration-text" x="300" y="255">ABConvert</text>
+
+            <!-- Integration Nodes -->
+            <circle class="integration-node" cx="150" cy="100" r="45"></circle>
+            <text class="integration-text" x="150" y="100" font-size="11">Kaching</text>
+            <text class="integration-text" x="150" y="112" font-size="11">Bundle</text>
+
+            <circle class="integration-node" cx="450" cy="100" r="45"></circle>
+            <text class="integration-text" x="450" y="105">Vitals</text>
+
+            <circle class="integration-node" cx="500" cy="300" r="45"></circle>
+            <text class="integration-text" x="500" y="305">Bundler</text>
+
+            <circle class="integration-node" cx="400" cy="420" r="45"></circle>
+            <text class="integration-text" x="400" y="425">Rebuy</text>
+
+            <circle class="integration-node" cx="100" cy="380" r="45"></circle>
+            <text class="integration-text" x="100" y="380" font-size="11">Swatch</text>
+            <text class="integration-text" x="100" y="392" font-size="11">King</text>
+          </svg>
         </div>
 
-        <div class="integration-card">
-          <div class="integration-icon" aria-hidden="true">SL</div>
-          <div class="integration-name">Slack</div>
-        </div>
-        <div class="integration-card float">
-          <div class="integration-icon" aria-hidden="true">ZP</div>
-          <div class="integration-name">Zapier</div>
-        </div>
-        <div class="integration-card">
-          <div class="integration-icon" aria-hidden="true">TW</div>
-          <div class="integration-name">Twilio</div>
-        </div>
-        <div class="integration-card">
-          <div class="integration-icon" aria-hidden="true">ST</div>
-          <div class="integration-name">Stripe</div>
-        </div>
-        <div class="integration-card float">
-          <div class="integration-icon" aria-hidden="true">HB</div>
-          <div class="integration-name">HubSpot</div>
-        </div>
-        <div class="integration-card">
-          <div class="integration-icon" aria-hidden="true">IM</div>
-          <div class="integration-name">Intercom</div>
-        </div>
-
-        <div class="integration-card">
-          <div class="integration-icon" aria-hidden="true">AM</div>
-          <div class="integration-name">Amplitude</div>
-        </div>
-        <div class="integration-card">
-          <div class="integration-icon" aria-hidden="true">DR</div>
-          <div class="integration-name">Drift</div>
-        </div>
-        <div class="integration-card">
-          <div class="integration-icon" aria-hidden="true">AS</div>
-          <div class="integration-name">Asana</div>
-        </div>
-        <div class="integration-card">
-          <div class="integration-icon" aria-hidden="true">NT</div>
-          <div class="integration-name">Notion</div>
-        </div>
-        <div class="integration-card coming-soon">
-          <div class="integration-icon" aria-hidden="true">+</div>
-          <div class="integration-name">Coming Soon</div>
-        </div>
-        <div class="integration-card coming-soon">
-          <div class="integration-icon" aria-hidden="true">+</div>
-          <div class="integration-name">Coming Soon</div>
+        <!-- Browse Integrations Button -->
+        <div class="integration-cta">
+          <button class="btn btn-tertiary btn-large">
+            Browse Integrations
+          </button>
         </div>
       </div>
     </div>
@@ -1522,15 +1397,51 @@
        ============================================================ -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-content">
-        <p>&copy; 2025 ABConvert. All rights reserved.</p>
-        <p>Built with ❤️ for Shopify merchants</p>
-        <nav class="footer-links" aria-label="Footer navigation">
-          <a href="#privacy" class="footer-link">Privacy</a>
-          <a href="#terms" class="footer-link">Terms</a>
-          <a href="#contact" class="footer-link">Contact</a>
-          <a href="#docs" class="footer-link">Documentation</a>
-        </nav>
+      <div class="footer-container">
+        <!-- Left Side -->
+        <div class="footer-left">
+          <img src="./assets/images/abconvert-logo-white.png" alt="ABConvert" class="footer-logo">
+          <div class="footer-social">
+            <!-- X/Twitter Icon -->
+            <a href="#" class="social-icon" aria-label="X (Twitter)">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+              </svg>
+            </a>
+            <!-- LinkedIn Icon -->
+            <a href="#" class="social-icon" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Side - Two Columns -->
+        <div class="footer-right">
+          <!-- Column 1 - Product -->
+          <div class="footer-column">
+            <h4>Product</h4>
+            <div class="footer-links">
+              <a href="#pricing" class="footer-link">Pricing</a>
+              <a href="#success-stories" class="footer-link">Success Stories</a>
+              <a href="#partnership" class="footer-link">Partnership</a>
+            </div>
+          </div>
+
+          <!-- Column 2 - Resource -->
+          <div class="footer-column">
+            <h4>Resource</h4>
+            <div class="footer-links">
+              <a href="#blog" class="footer-link">Blog</a>
+              <a href="#help" class="footer-link">Help</a>
+              <a href="#guideline" class="footer-link">Guideline</a>
+              <a href="#docs" class="footer-link">Doc</a>
+              <a href="#terms" class="footer-link">Terms of Service</a>
+              <a href="#privacy" class="footer-link">Privacy Policy</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </footer>
@@ -1554,7 +1465,7 @@
     // ============================================================
     const featureCards = document.querySelectorAll('.feature-card-small');
     const mainFeature = document.getElementById('main-feature');
-    const mainTag = document.getElementById('main-tag');
+    const mainTag = document.querySelector('#main-feature .feature-tag');
     const mainTitle = document.getElementById('main-title');
     const mainDescription = document.getElementById('main-description');
 
@@ -1601,7 +1512,7 @@
           mainFeature.style.opacity = '1';
 
           // Update references
-          document.getElementById('main-tag');
+          document.querySelector('#main-feature .feature-tag');
           document.getElementById('main-title');
           document.getElementById('main-description');
         }, 250);
@@ -1707,27 +1618,6 @@
         });
       });
     }
-
-    // ============================================================
-    // Smooth Scroll
-    // ============================================================
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href === '#') return;
-
-        const target = document.querySelector(href);
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
-
-    console.log('ABConvert Hero Redesign loaded successfully!');
   </script>
 
 </body>
