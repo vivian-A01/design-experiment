@@ -1,0 +1,24 @@
+{
+  "_comment": "Color tokens extracted from Figma design system",
+  "_description": "This file contains raw color values exported from Figma. These tokens should match the Polaris color palette and can be used to generate CSS custom properties or TypeScript constants.",
+  "colors": {
+    "figma/gray/50": "#FFFFFF",
+    "figma/gray/100": "#F7F7F7",
+    "figma/gray/300": "#E3E3E3",
+    "figma/gray/500": "#8C9196",
+    "figma/gray/700": "#303030",
+    "figma/gray/900": "#000000",
+    "figma/blue/100": "#E3F0FF",
+    "figma/blue/500": "#0171E9",
+    "figma/blue/700": "#004488",
+    "figma/green/100": "#D4F0E1",
+    "figma/green/500": "#11837C",
+    "figma/green/700": "#0C5548",
+    "figma/red/100": "#FFEBEB",
+    "figma/red/500": "#E01A1A",
+    "figma/red/700": "#940F0F",
+    "figma/yellow/100": "#FFF9E0",
+    "figma/yellow/300": "#FFEF9D",
+    "figma/yellow/500": "#FFD423"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "_comment": "Typography tokens extracted from Figma design system",
+  "_description": "This file contains font families, sizes, weights, line heights, and letter spacing values exported from Figma. Use these tokens to ensure typographic consistency with the Polaris design system.",
+  "typography": {
+    "fontFamily": {
+      "figma/font/sans": "-apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, sans-serif",
+      "figma/font/mono": "ui-monospace, SFMono-Regular, Menlo, monospace"
+    },
+    "fontSize": {
+      "figma/size/xs": "12",
+      "figma/size/sm": "13",
+      "figma/size/base": "14",
+      "figma/size/lg": "16",
+      "figma/size/xl": "20",
+      "figma/size/2xl": "24",
+      "figma/size/3xl": "32"
+    },
+    "fontWeight": {
+      "figma/weight/regular": "400",
+      "figma/weight/medium": "500",
+      "figma/weight/semibold": "600",
+      "figma/weight/bold": "700"
+    },
+    "lineHeight": {
+      "figma/leading/tight": "16",
+      "figma/leading/normal": "20",
+      "figma/leading/relaxed": "24",
+      "figma/leading/loose": "32"
+    }
+  }
+}

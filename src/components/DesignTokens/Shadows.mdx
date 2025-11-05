@@ -1,0 +1,301 @@
+import { Meta } from '@storybook/blocks';
+import { shadow, shadowInner, shadowFocus, shadowButton, shadows } from '../../tokens/shadows';
+
+<Meta title="Design Tokens/Shadows" />
+
+# Shadows
+
+Polaris shadow system provides elevation and depth effects for UI elements.
+
+---
+
+## Shadow Elevations
+
+Standard shadow tokens for different elevation levels.
+
+<div style={{ marginTop: '24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '24px' }}>
+  {Object.entries(shadow).map(([key, value]) => (
+    <div key={key} style={{
+      padding: '32px',
+      backgroundColor: '#fff',
+      border: '1px solid #E3E3E3',
+      borderRadius: '12px',
+      textAlign: 'center'
+    }}>
+      <div style={{
+        width: '120px',
+        height: '120px',
+        backgroundColor: '#fff',
+        boxShadow: value,
+        borderRadius: '8px',
+        margin: '0 auto 16px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <span style={{ fontSize: '32px' }}>📦</span>
+      </div>
+      <div style={{ fontSize: '14px', fontWeight: '600', marginBottom: '4px' }}>shadow.{key}</div>
+      <div style={{ fontSize: '11px', color: '#8C9196', wordBreak: 'break-word', fontFamily: 'monospace' }}>
+        {value === 'none' ? 'none' : value.substring(0, 40) + '...'}
+      </div>
+    </div>
+  ))}
+</div>
+
+---
+
+## Inner Shadows
+
+Inset shadow effects for pressed states.
+
+<div style={{ marginTop: '24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '24px' }}>
+  {Object.entries(shadowInner).map(([key, value]) => (
+    <div key={key} style={{
+      padding: '32px',
+      backgroundColor: '#fff',
+      border: '1px solid #E3E3E3',
+      borderRadius: '12px',
+      textAlign: 'center'
+    }}>
+      <div style={{
+        width: '120px',
+        height: '120px',
+        backgroundColor: '#F7F7F7',
+        boxShadow: value,
+        borderRadius: '8px',
+        margin: '0 auto 16px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <span style={{ fontSize: '32px' }}>🔘</span>
+      </div>
+      <div style={{ fontSize: '14px', fontWeight: '600', marginBottom: '4px' }}>shadowInner.{key}</div>
+      <div style={{ fontSize: '11px', color: '#8C9196', wordBreak: 'break-word', fontFamily: 'monospace' }}>
+        {value === 'none' ? 'none' : 'inset shadow'}
+      </div>
+    </div>
+  ))}
+</div>
+
+---
+
+## Focus Rings
+
+Accessibility focus indicators.
+
+<div style={{ marginTop: '24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '24px' }}>
+  {Object.entries(shadowFocus).map(([key, value]) => (
+    <div key={key} style={{
+      padding: '32px',
+      backgroundColor: '#fff',
+      border: '1px solid #E3E3E3',
+      borderRadius: '12px',
+      textAlign: 'center'
+    }}>
+      <div style={{
+        width: '120px',
+        height: '48px',
+        backgroundColor: '#fff',
+        border: '2px solid #0171E9',
+        boxShadow: value,
+        borderRadius: '8px',
+        margin: '0 auto 16px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: '14px',
+        fontWeight: '600',
+        color: '#0171E9'
+      }}>
+        Focused
+      </div>
+      <div style={{ fontSize: '14px', fontWeight: '600', marginBottom: '4px' }}>shadowFocus.{key}</div>
+      <div style={{ fontSize: '11px', color: '#8C9196', wordBreak: 'break-word', fontFamily: 'monospace' }}>
+        {key} ring
+      </div>
+    </div>
+  ))}
+</div>
+
+---
+
+## Button Shadows
+
+Special shadow tokens for button states.
+
+<div style={{ marginTop: '24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '24px' }}>
+  {Object.entries(shadowButton).map(([key, value]) => (
+    <div key={key} style={{
+      padding: '32px',
+      backgroundColor: '#fff',
+      border: '1px solid #E3E3E3',
+      borderRadius: '12px',
+      textAlign: 'center'
+    }}>
+      <div style={{
+        width: '120px',
+        height: '40px',
+        backgroundColor: key.includes('primary') ? '#0171E9' : '#FFFFFF',
+        color: key.includes('primary') ? '#FFFFFF' : '#202223',
+        border: key.includes('primary') ? 'none' : '1px solid #C9CCCF',
+        boxShadow: value,
+        borderRadius: '6px',
+        margin: '0 auto 16px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: '14px',
+        fontWeight: '500'
+      }}>
+        Button
+      </div>
+      <div style={{ fontSize: '14px', fontWeight: '600', marginBottom: '4px' }}>shadowButton.{key}</div>
+      <div style={{ fontSize: '11px', color: '#8C9196' }}>
+        {key.includes('default') ? 'Default state' : key.includes('hover') ? 'Hover state' : 'Pressed state'}
+      </div>
+    </div>
+  ))}
+</div>
+
+---
+
+## Semantic Shadows
+
+Pre-configured shadow tokens for common components.
+
+<div style={{ marginTop: '24px' }}>
+  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '24px' }}>
+    <div style={{ padding: '24px', backgroundColor: '#F7F7F7', borderRadius: '12px' }}>
+      <div style={{
+        padding: '24px',
+        backgroundColor: '#fff',
+        boxShadow: shadows.card,
+        borderRadius: '8px',
+        marginBottom: '16px'
+      }}>
+        <div style={{ fontSize: '16px', fontWeight: '600', marginBottom: '8px' }}>Card</div>
+        <div style={{ fontSize: '14px', color: '#616161' }}>Default card elevation</div>
+      </div>
+      <div style={{ fontSize: '12px', color: '#616161' }}>shadows.card</div>
+    </div>
+
+    <div style={{ padding: '24px', backgroundColor: '#F7F7F7', borderRadius: '12px' }}>
+      <div style={{
+        padding: '24px',
+        backgroundColor: '#fff',
+        boxShadow: shadows.cardHovered,
+        borderRadius: '8px',
+        marginBottom: '16px'
+      }}>
+        <div style={{ fontSize: '16px', fontWeight: '600', marginBottom: '8px' }}>Card Hovered</div>
+        <div style={{ fontSize: '14px', color: '#616161' }}>Elevated card on hover</div>
+      </div>
+      <div style={{ fontSize: '12px', color: '#616161' }}>shadows.cardHovered</div>
+    </div>
+
+    <div style={{ padding: '24px', backgroundColor: '#F7F7F7', borderRadius: '12px' }}>
+      <div style={{
+        padding: '24px',
+        backgroundColor: '#fff',
+        boxShadow: shadows.popover,
+        borderRadius: '8px',
+        marginBottom: '16px'
+      }}>
+        <div style={{ fontSize: '16px', fontWeight: '600', marginBottom: '8px' }}>Popover</div>
+        <div style={{ fontSize: '14px', color: '#616161' }}>Dropdown and popover</div>
+      </div>
+      <div style={{ fontSize: '12px', color: '#616161' }}>shadows.popover</div>
+    </div>
+
+    <div style={{ padding: '24px', backgroundColor: '#F7F7F7', borderRadius: '12px' }}>
+      <div style={{
+        padding: '24px',
+        backgroundColor: '#fff',
+        boxShadow: shadows.modal,
+        borderRadius: '8px',
+        marginBottom: '16px'
+      }}>
+        <div style={{ fontSize: '16px', fontWeight: '600', marginBottom: '8px' }}>Modal</div>
+        <div style={{ fontSize: '14px', color: '#616161' }}>Modal and dialog</div>
+      </div>
+      <div style={{ fontSize: '12px', color: '#616161' }}>shadows.modal</div>
+    </div>
+
+    <div style={{ padding: '24px', backgroundColor: '#F7F7F7', borderRadius: '12px' }}>
+      <div style={{
+        padding: '16px 24px',
+        backgroundColor: '#FFFFFF',
+        border: '1px solid #C9CCCF',
+        boxShadow: shadows.button,
+        borderRadius: '6px',
+        marginBottom: '16px',
+        textAlign: 'center',
+        fontSize: '14px',
+        fontWeight: '500'
+      }}>
+        Button Default
+      </div>
+      <div style={{ fontSize: '12px', color: '#616161' }}>shadows.button</div>
+    </div>
+
+    <div style={{ padding: '24px', backgroundColor: '#F7F7F7', borderRadius: '12px' }}>
+      <div style={{
+        padding: '16px 24px',
+        backgroundColor: '#FAFAFA',
+        border: '1px solid #B5B5B5',
+        boxShadow: shadows.buttonHovered,
+        borderRadius: '6px',
+        marginBottom: '16px',
+        textAlign: 'center',
+        fontSize: '14px',
+        fontWeight: '500'
+      }}>
+        Button Hovered
+      </div>
+      <div style={{ fontSize: '12px', color: '#616161' }}>shadows.buttonHovered</div>
+    </div>
+  </div>
+</div>
+
+---
+
+## Usage
+
+```tsx
+import { shadow, shadows, shadowFocus } from '@your-org/polaris-design-library/tokens';
+
+// Card with elevation
+const card = {
+  boxShadow: shadows.card,
+};
+
+// Card on hover
+const cardHovered = {
+  boxShadow: shadows.cardHovered,
+};
+
+// Focus indicator
+const focusedElement = {
+  boxShadow: shadowFocus.default,
+};
+
+// Custom elevation
+const elevated = {
+  boxShadow: shadow.lg,
+};
+```
+
+---
+
+## Elevation Guidelines
+
+| Component | Token | Use Case |
+|-----------|-------|----------|
+| Cards | `shadows.card` | Default card elevation |
+| Cards (hover) | `shadows.cardHovered` | Interactive cards on hover |
+| Popovers | `shadows.popover` | Dropdowns, tooltips |
+| Modals | `shadows.modal` | Dialogs, overlays |
+| Buttons | `shadows.button` | Button default state |
+| Focus | `shadowFocus.default` | Keyboard focus indicator |

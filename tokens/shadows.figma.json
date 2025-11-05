@@ -1,0 +1,43 @@
+{
+  "_comment": "Shadow/elevation tokens extracted from Figma design system",
+  "_description": "This file contains box-shadow values exported from Figma. These elevation tokens help maintain consistent depth and layering in the UI following Polaris design principles.",
+  "shadows": {
+    "figma/shadow/none": "none",
+    "figma/shadow/xs": {
+      "x": "0",
+      "y": "1",
+      "blur": "0",
+      "spread": "0",
+      "color": "rgba(0, 0, 0, 0.05)"
+    },
+    "figma/shadow/sm": {
+      "x": "0",
+      "y": "1",
+      "blur": "3",
+      "spread": "0",
+      "color": "rgba(0, 0, 0, 0.1)"
+    },
+    "figma/shadow/md": {
+      "x": "0",
+      "y": "4",
+      "blur": "6",
+      "spread": "-1",
+      "color": "rgba(0, 0, 0, 0.1)"
+    },
+    "figma/shadow/lg": {
+      "x": "0",
+      "y": "10",
+      "blur": "15",
+      "spread": "-3",
+      "color": "rgba(0, 0, 0, 0.1)"
+    },
+    "figma/shadow/button-default": {
+      "inset": true,
+      "x": "0",
+      "y": "-1",
+      "blur": "0",
+      "spread": "0",
+      "color": "rgba(0, 0, 0, 0.2)"
+    }
+  }
+}

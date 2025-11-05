@@ -1,0 +1,14 @@
+{
+  "shadow-none": "none",
+  "shadow-xs": "0px 1px 0px 0px rgba(0, 0, 0, 0.05)",
+  "shadow-sm": "0px 1px 3px 0px rgba(0, 0, 0, 0.1)",
+  "shadow-md": "0px 4px 6px -1px rgba(0, 0, 0, 0.1)",
+  "shadow-lg": "0px 10px 15px -3px rgba(0, 0, 0, 0.1)",
+  "shadow-button-default": "inset 0px -1px 0px 0px rgba(0, 0, 0, 0.2)",
+  "shadow-card": "0px 1px 3px 0px rgba(0, 0, 0, 0.1)",
+  "shadow-card-hovered": "0px 4px 6px -1px rgba(0, 0, 0, 0.1)",
+  "shadow-popover": "0px 10px 15px -3px rgba(0, 0, 0, 0.1)",
+  "shadow-modal": "0px 10px 15px -3px rgba(0, 0, 0, 0.1)",
+  "shadow-focus": "0 0 0 3px rgba(1, 113, 233, 0.35)",
+  "shadow-focus-critical": "0 0 0 3px rgba(224, 26, 26, 0.35)"
+}

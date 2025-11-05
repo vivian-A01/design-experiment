@@ -1,0 +1,67 @@
+{
+  "font-family-sans": "-apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, sans-serif",
+  "font-family-mono": "ui-monospace, SFMono-Regular, Menlo, monospace",
+  "font-size-xs": "12px",
+  "font-size-sm": "13px",
+  "font-size-base": "14px",
+  "font-size-lg": "16px",
+  "font-size-xl": "20px",
+  "font-size-2xl": "24px",
+  "font-size-3xl": "32px",
+  "font-weight-regular": "400",
+  "font-weight-medium": "500",
+  "font-weight-semibold": "600",
+  "font-weight-bold": "700",
+  "line-height-tight": "16px",
+  "line-height-normal": "20px",
+  "line-height-relaxed": "24px",
+  "line-height-loose": "32px",
+  "font-heading-xl": {
+    "fontFamily": "-apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, sans-serif",
+    "fontSize": "32px",
+    "fontWeight": "700",
+    "lineHeight": "32px"
+  },
+  "font-heading-lg": {
+    "fontFamily": "-apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, sans-serif",
+    "fontSize": "24px",
+    "fontWeight": "700",
+    "lineHeight": "32px"
+  },
+  "font-heading-md": {
+    "fontFamily": "-apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, sans-serif",
+    "fontSize": "20px",
+    "fontWeight": "600",
+    "lineHeight": "24px"
+  },
+  "font-heading-sm": {
+    "fontFamily": "-apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, sans-serif",
+    "fontSize": "16px",
+    "fontWeight": "600",
+    "lineHeight": "20px"
+  },
+  "font-body-lg": {
+    "fontFamily": "-apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, sans-serif",
+    "fontSize": "16px",
+    "fontWeight": "400",
+    "lineHeight": "24px"
+  },
+  "font-body-md": {
+    "fontFamily": "-apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, sans-serif",
+    "fontSize": "14px",
+    "fontWeight": "400",
+    "lineHeight": "20px"
+  },
+  "font-body-sm": {
+    "fontFamily": "-apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, sans-serif",
+    "fontSize": "13px",
+    "fontWeight": "400",
+    "lineHeight": "20px"
+  },
+  "font-caption": {
+    "fontFamily": "-apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, sans-serif",
+    "fontSize": "12px",
+    "fontWeight": "400",
+    "lineHeight": "16px"
+  }
+}

@@ -1,0 +1,198 @@
+import { Meta } from '@storybook/blocks';
+import { spacing, spacingSemantic, gap, inset } from '../../tokens/spacing';
+
+<Meta title="Design Tokens/Spacing" />
+
+# Spacing
+
+Polaris spacing system provides consistent spacing values for margins, padding, and gaps.
+
+---
+
+## Spacing Scale
+
+All spacing tokens with visual examples.
+
+<div style={{ marginTop: '24px' }}>
+  {Object.entries(spacing).map(([key, value]) => (
+    <div key={key} style={{
+      padding: '16px',
+      backgroundColor: '#fff',
+      border: '1px solid #E3E3E3',
+      borderRadius: '8px',
+      marginBottom: '12px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between'
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flex: 1 }}>
+        <div style={{
+          width: value,
+          height: '32px',
+          backgroundColor: '#0171E9',
+          borderRadius: '4px',
+          minWidth: '2px'
+        }} />
+        <div>
+          <div style={{ fontSize: '14px', fontWeight: '600' }}>spacing.{key}</div>
+          <div style={{ fontSize: '12px', color: '#8C9196' }}>{value} • {parseFloat(value) * 16}px</div>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+---
+
+## Semantic Spacing
+
+Pre-configured spacing for common use cases.
+
+<div style={{ marginTop: '24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '16px' }}>
+  {Object.entries(spacingSemantic).map(([key, value]) => (
+    <div key={key} style={{
+      padding: '16px',
+      backgroundColor: '#fff',
+      border: '1px solid #E3E3E3',
+      borderRadius: '8px'
+    }}>
+      <div style={{
+        width: value,
+        height: '40px',
+        backgroundColor: '#0171E9',
+        borderRadius: '4px',
+        marginBottom: '12px'
+      }} />
+      <div style={{ fontSize: '14px', fontWeight: '600' }}>spacingSemantic.{key}</div>
+      <div style={{ fontSize: '12px', color: '#8C9196', marginTop: '4px' }}>{value}</div>
+    </div>
+  ))}
+</div>
+
+---
+
+## Gap Tokens
+
+For flexbox and grid layouts.
+
+<div style={{ marginTop: '24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '16px' }}>
+  {Object.entries(gap).map(([key, value]) => (
+    <div key={key} style={{
+      padding: '16px',
+      backgroundColor: '#fff',
+      border: '1px solid #E3E3E3',
+      borderRadius: '8px'
+    }}>
+      <div style={{ display: 'flex', gap: value, marginBottom: '12px' }}>
+        <div style={{ width: '40px', height: '40px', backgroundColor: '#0171E9', borderRadius: '4px' }} />
+        <div style={{ width: '40px', height: '40px', backgroundColor: '#0171E9', borderRadius: '4px' }} />
+        <div style={{ width: '40px', height: '40px', backgroundColor: '#0171E9', borderRadius: '4px' }} />
+      </div>
+      <div style={{ fontSize: '14px', fontWeight: '600' }}>gap.{key}</div>
+      <div style={{ fontSize: '12px', color: '#8C9196', marginTop: '4px' }}>{value}</div>
+    </div>
+  ))}
+</div>
+
+---
+
+## Inset Tokens
+
+For padding values.
+
+<div style={{ marginTop: '24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '16px' }}>
+  {Object.entries(inset).map(([key, value]) => (
+    <div key={key} style={{
+      padding: '16px',
+      backgroundColor: '#fff',
+      border: '1px solid #E3E3E3',
+      borderRadius: '8px'
+    }}>
+      <div style={{
+        padding: value,
+        backgroundColor: '#F1F8F5',
+        border: '2px solid #11837C',
+        borderRadius: '4px',
+        marginBottom: '12px',
+        minHeight: '40px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <div style={{ fontSize: '12px', color: '#0C5548' }}>Content</div>
+      </div>
+      <div style={{ fontSize: '14px', fontWeight: '600' }}>inset.{key}</div>
+      <div style={{ fontSize: '12px', color: '#8C9196', marginTop: '4px' }}>{value}</div>
+    </div>
+  ))}
+</div>
+
+---
+
+## Usage Examples
+
+### Margin
+
+```tsx
+import { spacing, spacingSemantic } from '@your-org/polaris-design-library/tokens';
+
+// Using specific spacing
+const box = {
+  margin: spacing['200'], // 16px
+};
+
+// Using semantic spacing
+const section = {
+  marginBottom: spacingSemantic.loose, // 24px
+};
+```
+
+### Padding
+
+```tsx
+import { inset } from '@your-org/polaris-design-library/tokens';
+
+const card = {
+  padding: inset.lg, // 24px
+};
+```
+
+### Flexbox Gap
+
+```tsx
+import { gap } from '@your-org/polaris-design-library/tokens';
+
+const flexContainer = {
+  display: 'flex',
+  gap: gap.md, // 16px
+};
+```
+
+### Grid Gap
+
+```tsx
+import { gap } from '@your-org/polaris-design-library/tokens';
+
+const gridContainer = {
+  display: 'grid',
+  gap: gap.lg, // 24px
+  gridTemplateColumns: 'repeat(3, 1fr)',
+};
+```
+
+---
+
+## Spacing Reference
+
+| Token | Value | Pixels | Common Use |
+|-------|-------|--------|------------|
+| `none` | 0 | 0px | No spacing |
+| `050` | 0.25rem | 4px | Extra tight spacing |
+| `100` | 0.5rem | 8px | Tight spacing, icons |
+| `200` | 1rem | 16px | Base spacing unit |
+| `300` | 1.25rem | 20px | Medium spacing |
+| `400` | 1.5rem | 24px | Large spacing |
+| `600` | 2rem | 32px | Section spacing |
+| `800` | 2.5rem | 40px | Large sections |
+| `1000` | 3rem | 48px | Major sections |
+| `1200` | 4rem | 64px | Page sections |

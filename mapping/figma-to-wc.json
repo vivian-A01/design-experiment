@@ -1,0 +1,5 @@
+{
+  "_comment": "Maps Figma component names to Polaris Web Component equivalents",
+  "_description": "This file defines the mapping between Figma design components and their corresponding Shopify Polaris React components. Use this to automate component generation and ensure design-to-code consistency.",
+  "mappings": {}
+}

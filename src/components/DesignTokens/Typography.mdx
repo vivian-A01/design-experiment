@@ -1,0 +1,254 @@
+import { Meta } from '@storybook/blocks';
+import { fontSize, fontWeight, lineHeight, typography, fontFamily } from '../../tokens/typography';
+
+<Meta title="Design Tokens/Typography" />
+
+# Typography
+
+Polaris typography system includes font scales, weights, and semantic text styles for consistent typography.
+
+---
+
+## Font Families
+
+<div style={{ marginTop: '24px' }}>
+  <div style={{ padding: '24px', backgroundColor: '#fff', border: '1px solid #E3E3E3', borderRadius: '8px', marginBottom: '16px' }}>
+    <div style={{ fontFamily: fontFamily.sans, fontSize: '24px', marginBottom: '8px' }}>
+      The quick brown fox jumps over the lazy dog
+    </div>
+    <div style={{ fontSize: '12px', color: '#616161' }}>fontFamily.sans</div>
+    <div style={{ fontSize: '11px', color: '#8C9196', marginTop: '4px', fontFamily: 'monospace' }}>{fontFamily.sans}</div>
+  </div>
+
+  <div style={{ padding: '24px', backgroundColor: '#fff', border: '1px solid #E3E3E3', borderRadius: '8px' }}>
+    <div style={{ fontFamily: fontFamily.mono, fontSize: '18px', marginBottom: '8px' }}>
+      const message = "Hello, World!";
+    </div>
+    <div style={{ fontSize: '12px', color: '#616161' }}>fontFamily.mono</div>
+    <div style={{ fontSize: '11px', color: '#8C9196', marginTop: '4px', fontFamily: 'monospace' }}>{fontFamily.mono}</div>
+  </div>
+</div>
+
+---
+
+## Font Sizes
+
+<div style={{ marginTop: '24px' }}>
+  {Object.entries(fontSize).map(([key, value]) => (
+    <div key={key} style={{
+      padding: '16px',
+      backgroundColor: '#fff',
+      border: '1px solid #E3E3E3',
+      borderRadius: '8px',
+      marginBottom: '12px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between'
+    }}>
+      <div style={{ fontSize: value, fontWeight: '500' }}>
+        The quick brown fox
+      </div>
+      <div style={{ textAlign: 'right', minWidth: '150px' }}>
+        <div style={{ fontSize: '12px', fontWeight: '600' }}>fontSize.{key}</div>
+        <div style={{ fontSize: '11px', color: '#8C9196' }}>{value}</div>
+      </div>
+    </div>
+  ))}
+</div>
+
+---
+
+## Font Weights
+
+<div style={{ marginTop: '24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '16px' }}>
+  {Object.entries(fontWeight).map(([key, value]) => (
+    <div key={key} style={{ padding: '16px', backgroundColor: '#fff', border: '1px solid #E3E3E3', borderRadius: '8px' }}>
+      <div style={{ fontSize: '18px', fontWeight: value, marginBottom: '8px' }}>
+        Sample Text
+      </div>
+      <div style={{ fontSize: '12px', fontWeight: '600' }}>fontWeight.{key}</div>
+      <div style={{ fontSize: '11px', color: '#8C9196', marginTop: '4px' }}>{value}</div>
+    </div>
+  ))}
+</div>
+
+---
+
+## Semantic Typography Styles
+
+Use these pre-configured typography styles for consistent text hierarchy.
+
+### Headings
+
+<div style={{ marginTop: '24px' }}>
+  <div style={{ padding: '24px', backgroundColor: '#fff', border: '1px solid #E3E3E3', borderRadius: '8px', marginBottom: '16px' }}>
+    <div style={{
+      fontFamily: typography.headingXl.fontFamily,
+      fontSize: typography.headingXl.fontSize,
+      fontWeight: typography.headingXl.fontWeight,
+      lineHeight: typography.headingXl.lineHeight,
+      marginBottom: '8px'
+    }}>
+      Extra Large Heading
+    </div>
+    <div style={{ fontSize: '12px', color: '#616161' }}>typography.headingXl</div>
+    <div style={{ fontSize: '11px', color: '#8C9196', marginTop: '4px' }}>
+      Size: {typography.headingXl.fontSize} • Weight: {typography.headingXl.fontWeight}
+    </div>
+  </div>
+
+  <div style={{ padding: '24px', backgroundColor: '#fff', border: '1px solid #E3E3E3', borderRadius: '8px', marginBottom: '16px' }}>
+    <div style={{
+      fontFamily: typography.headingLg.fontFamily,
+      fontSize: typography.headingLg.fontSize,
+      fontWeight: typography.headingLg.fontWeight,
+      lineHeight: typography.headingLg.lineHeight,
+      marginBottom: '8px'
+    }}>
+      Large Heading
+    </div>
+    <div style={{ fontSize: '12px', color: '#616161' }}>typography.headingLg</div>
+    <div style={{ fontSize: '11px', color: '#8C9196', marginTop: '4px' }}>
+      Size: {typography.headingLg.fontSize} • Weight: {typography.headingLg.fontWeight}
+    </div>
+  </div>
+
+  <div style={{ padding: '24px', backgroundColor: '#fff', border: '1px solid #E3E3E3', borderRadius: '8px', marginBottom: '16px' }}>
+    <div style={{
+      fontFamily: typography.headingMd.fontFamily,
+      fontSize: typography.headingMd.fontSize,
+      fontWeight: typography.headingMd.fontWeight,
+      lineHeight: typography.headingMd.lineHeight,
+      marginBottom: '8px'
+    }}>
+      Medium Heading
+    </div>
+    <div style={{ fontSize: '12px', color: '#616161' }}>typography.headingMd</div>
+    <div style={{ fontSize: '11px', color: '#8C9196', marginTop: '4px' }}>
+      Size: {typography.headingMd.fontSize} • Weight: {typography.headingMd.fontWeight}
+    </div>
+  </div>
+
+  <div style={{ padding: '24px', backgroundColor: '#fff', border: '1px solid #E3E3E3', borderRadius: '8px', marginBottom: '16px' }}>
+    <div style={{
+      fontFamily: typography.headingSm.fontFamily,
+      fontSize: typography.headingSm.fontSize,
+      fontWeight: typography.headingSm.fontWeight,
+      lineHeight: typography.headingSm.lineHeight,
+      marginBottom: '8px'
+    }}>
+      Small Heading
+    </div>
+    <div style={{ fontSize: '12px', color: '#616161' }}>typography.headingSm</div>
+    <div style={{ fontSize: '11px', color: '#8C9196', marginTop: '4px' }}>
+      Size: {typography.headingSm.fontSize} • Weight: {typography.headingSm.fontWeight}
+    </div>
+  </div>
+</div>
+
+### Body Text
+
+<div style={{ marginTop: '24px' }}>
+  <div style={{ padding: '24px', backgroundColor: '#fff', border: '1px solid #E3E3E3', borderRadius: '8px', marginBottom: '16px' }}>
+    <div style={{
+      fontFamily: typography.bodyLg.fontFamily,
+      fontSize: typography.bodyLg.fontSize,
+      fontWeight: typography.bodyLg.fontWeight,
+      lineHeight: typography.bodyLg.lineHeight,
+      marginBottom: '8px'
+    }}>
+      Large body text for comfortable reading. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    </div>
+    <div style={{ fontSize: '12px', color: '#616161' }}>typography.bodyLg</div>
+    <div style={{ fontSize: '11px', color: '#8C9196', marginTop: '4px' }}>
+      Size: {typography.bodyLg.fontSize} • Weight: {typography.bodyLg.fontWeight}
+    </div>
+  </div>
+
+  <div style={{ padding: '24px', backgroundColor: '#fff', border: '1px solid #E3E3E3', borderRadius: '8px', marginBottom: '16px' }}>
+    <div style={{
+      fontFamily: typography.bodyMd.fontFamily,
+      fontSize: typography.bodyMd.fontSize,
+      fontWeight: typography.bodyMd.fontWeight,
+      lineHeight: typography.bodyMd.lineHeight,
+      marginBottom: '8px'
+    }}>
+      Medium body text, the default for most UI text. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    </div>
+    <div style={{ fontSize: '12px', color: '#616161' }}>typography.bodyMd</div>
+    <div style={{ fontSize: '11px', color: '#8C9196', marginTop: '4px' }}>
+      Size: {typography.bodyMd.fontSize} • Weight: {typography.bodyMd.fontWeight}
+    </div>
+  </div>
+
+  <div style={{ padding: '24px', backgroundColor: '#fff', border: '1px solid #E3E3E3', borderRadius: '8px', marginBottom: '16px' }}>
+    <div style={{
+      fontFamily: typography.bodySm.fontFamily,
+      fontSize: typography.bodySm.fontSize,
+      fontWeight: typography.bodySm.fontWeight,
+      lineHeight: typography.bodySm.lineHeight,
+      marginBottom: '8px'
+    }}>
+      Small body text for dense layouts. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    </div>
+    <div style={{ fontSize: '12px', color: '#616161' }}>typography.bodySm</div>
+    <div style={{ fontSize: '11px', color: '#8C9196', marginTop: '4px' }}>
+      Size: {typography.bodySm.fontSize} • Weight: {typography.bodySm.fontWeight}
+    </div>
+  </div>
+</div>
+
+### Caption and Code
+
+<div style={{ marginTop: '24px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+  <div style={{ padding: '24px', backgroundColor: '#fff', border: '1px solid #E3E3E3', borderRadius: '8px' }}>
+    <div style={{
+      fontFamily: typography.caption.fontFamily,
+      fontSize: typography.caption.fontSize,
+      fontWeight: typography.caption.fontWeight,
+      lineHeight: typography.caption.lineHeight,
+      marginBottom: '8px'
+    }}>
+      Caption text for labels and metadata
+    </div>
+    <div style={{ fontSize: '12px', color: '#616161' }}>typography.caption</div>
+    <div style={{ fontSize: '11px', color: '#8C9196', marginTop: '4px' }}>
+      Size: {typography.caption.fontSize}
+    </div>
+  </div>
+
+  <div style={{ padding: '24px', backgroundColor: '#f7f7f7', border: '1px solid #E3E3E3', borderRadius: '8px' }}>
+    <div style={{
+      fontFamily: typography.code.fontFamily,
+      fontSize: typography.code.fontSize,
+      fontWeight: typography.code.fontWeight,
+      lineHeight: typography.code.lineHeight,
+      marginBottom: '8px'
+    }}>
+      const greeting = "Hello";
+    </div>
+    <div style={{ fontSize: '12px', color: '#616161' }}>typography.code</div>
+    <div style={{ fontSize: '11px', color: '#8C9196', marginTop: '4px' }}>
+      Monospace font
+    </div>
+  </div>
+</div>
+
+---
+
+## Usage
+
+```tsx
+import { typography, fontSize, fontWeight } from '@your-org/polaris-design-library/tokens';
+
+// Use typography styles
+const heading = {
+  ...typography.headingLg,
+};
+
+// Or compose your own
+const customText = {
+  fontSize: fontSize['400'],
+  fontWeight: fontWeight.semibold,
+};
+```

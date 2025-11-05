@@ -1,0 +1,393 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Getting Started" />
+
+# Getting Started
+
+Learn how to use the Polaris Design Library in your React application.
+
+## Installation
+
+First, install the required packages:
+
+```bash
+npm install @your-org/polaris-design-library @shopify/polaris
+```
+
+## Setup
+
+### 1. Import Polaris Web Components
+
+In your application's entry point (e.g., `main.tsx`, `index.tsx`, or `_app.tsx`), import the Polaris web components:
+
+```tsx
+// main.tsx or index.tsx
+import '@shopify/polaris/build/esm/components';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App';
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
+```
+
+For Next.js:
+
+```tsx
+// pages/_app.tsx
+import '@shopify/polaris/build/esm/components';
+import type { AppProps } from 'next/app';
+
+export default function App({ Component, pageProps }: AppProps) {
+  return <Component {...pageProps} />;
+}
+```
+
+### 2. Import Components
+
+Import components from the library:
+
+```tsx
+import { Button } from '@your-org/polaris-design-library';
+```
+
+## Basic Usage
+
+### Simple Button
+
+```tsx
+import { Button } from '@your-org/polaris-design-library';
+
+function MyComponent() {
+  return <Button>Click me</Button>;
+}
+```
+
+### Button with Event Handler
+
+```tsx
+import { Button } from '@your-org/polaris-design-library';
+
+function MyComponent() {
+  const handleClick = (event: Event) => {
+    console.log('Button clicked!', event);
+  };
+
+  return (
+    <Button variant="primary" onClick={handleClick}>
+      Save Product
+    </Button>
+  );
+}
+```
+
+### Button with Icon
+
+```tsx
+import { Button } from '@your-org/polaris-design-library';
+
+function MyComponent() {
+  return (
+    <Button variant="primary" icon="plus">
+      Add Product
+    </Button>
+  );
+}
+```
+
+### Loading State
+
+```tsx
+import { Button } from '@your-org/polaris-design-library';
+import { useState } from 'react';
+
+function MyComponent() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSave = async () => {
+    setIsLoading(true);
+    try {
+      await saveProduct();
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <Button variant="primary" loading={isLoading} onClick={handleSave}>
+      Save Product
+    </Button>
+  );
+}
+```
+
+## TypeScript Support
+
+The library is built with TypeScript and provides full type definitions:
+
+```tsx
+import { Button, type ButtonProps } from '@your-org/polaris-design-library';
+
+// TypeScript will autocomplete and type-check all props
+const MyButton = (props: ButtonProps) => {
+  return <Button {...props} />;
+};
+
+// Example with specific types
+const handleClick = (event: Event) => {
+  console.log('Clicked!', event.currentTarget);
+};
+
+<Button
+  variant="primary"     // Type: 'auto' | 'primary' | 'secondary' | 'tertiary'
+  tone="critical"       // Type: 'auto' | 'neutral' | 'critical'
+  icon="plus"           // Type: ButtonIcon (string literal union)
+  disabled={false}      // Type: boolean
+  loading={false}       // Type: boolean
+  onClick={handleClick} // Type: (event: Event) => void
+>
+  Save
+</Button>
+```
+
+## Common Patterns
+
+### Form Actions
+
+```tsx
+import { Button } from '@your-org/polaris-design-library';
+
+function ProductForm() {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle form submission
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {/* Form fields */}
+
+      <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
+        <Button variant="secondary" type="button">
+          Cancel
+        </Button>
+        <Button variant="primary" type="submit">
+          Save Product
+        </Button>
+      </div>
+    </form>
+  );
+}
+```
+
+### Destructive Actions
+
+```tsx
+import { Button } from '@your-org/polaris-design-library';
+
+function DeleteConfirmation({ onCancel, onConfirm }) {
+  return (
+    <div style={{ display: 'flex', gap: '12px' }}>
+      <Button variant="secondary" onClick={onCancel}>
+        Cancel
+      </Button>
+      <Button variant="primary" tone="critical" onClick={onConfirm}>
+        Delete Product
+      </Button>
+    </div>
+  );
+}
+```
+
+### Navigation with Link Button
+
+```tsx
+import { Button } from '@your-org/polaris-design-library';
+
+function Navigation() {
+  return (
+    <div>
+      <Button href="/products" icon="product">
+        View Products
+      </Button>
+
+      <Button href="https://help.shopify.com" target="_blank">
+        Help Documentation
+      </Button>
+    </div>
+  );
+}
+```
+
+### Icon-Only Buttons (Accessible)
+
+```tsx
+import { Button } from '@your-org/polaris-design-library';
+
+function Toolbar() {
+  return (
+    <div style={{ display: 'flex', gap: '8px' }}>
+      <Button
+        icon="duplicate"
+        variant="tertiary"
+        accessibilityLabel="Duplicate product"
+      />
+      <Button
+        icon="view"
+        variant="tertiary"
+        accessibilityLabel="Preview product"
+      />
+      <Button
+        icon="menu-horizontal"
+        variant="tertiary"
+        accessibilityLabel="More actions"
+      />
+    </div>
+  );
+}
+```
+
+### Async Operations
+
+```tsx
+import { Button } from '@your-org/polaris-design-library';
+import { useState } from 'react';
+
+function BulkActions() {
+  const [isExporting, setIsExporting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const handleExport = async () => {
+    setIsExporting(true);
+    try {
+      await exportSelectedProducts();
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    setIsDeleting(true);
+    try {
+      await deleteSelectedProducts();
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
+  return (
+    <div style={{ display: 'flex', gap: '12px' }}>
+      <Button
+        variant="secondary"
+        loading={isExporting}
+        onClick={handleExport}
+      >
+        {isExporting ? 'Exporting...' : 'Export Selected'}
+      </Button>
+      <Button
+        variant="primary"
+        tone="critical"
+        loading={isDeleting}
+        onClick={handleDelete}
+      >
+        {isDeleting ? 'Deleting...' : 'Delete Selected'}
+      </Button>
+    </div>
+  );
+}
+```
+
+## Styling
+
+Components use Polaris design tokens internally and don't require additional styling. However, you can:
+
+### Add Custom Classes
+
+```tsx
+<Button className="my-custom-class" variant="primary">
+  Custom Styled Button
+</Button>
+```
+
+### Add Inline Styles
+
+```tsx
+<Button style={{ marginTop: '20px' }} variant="primary">
+  Button with Margin
+</Button>
+```
+
+### Layout with Flexbox
+
+```tsx
+<div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
+  <Button variant="secondary">Cancel</Button>
+  <Button variant="primary">Save</Button>
+</div>
+```
+
+## Best Practices
+
+### ✅ Do
+
+- Use `accessibilityLabel` for icon-only buttons
+- Use appropriate `variant` and `tone` for visual hierarchy
+- Show loading states during async operations
+- Use `type="submit"` for form submission buttons
+- Provide clear, action-oriented button labels
+
+### ❌ Don't
+
+- Don't nest buttons inside buttons
+- Don't use buttons for navigation (use `href` prop instead)
+- Don't forget accessibility labels for icon-only buttons
+- Don't use vague labels like "Click here" or "Submit"
+
+## Troubleshooting
+
+### Components not rendering?
+
+Make sure you've imported Polaris web components:
+
+```tsx
+import '@shopify/polaris/build/esm/components';
+```
+
+### TypeScript errors?
+
+Ensure you're using the correct prop types:
+
+```tsx
+import type { ButtonProps } from '@your-org/polaris-design-library';
+```
+
+### Events not firing?
+
+Web component events use native Event objects, not React SyntheticEvents:
+
+```tsx
+// ✅ Correct
+const handleClick = (event: Event) => {
+  console.log(event.currentTarget);
+};
+
+// ❌ Incorrect
+const handleClick = (event: React.MouseEvent) => {
+  // Won't work with web components
+};
+```
+
+## Next Steps
+
+- Explore the [Button component](?path=/docs/components-button--docs) examples
+- Read the [Component API](?path=/docs/components-button--docs) documentation
+- Check out the [Playground](?path=/story/components-button--playground) to experiment
+
+## Need Help?
+
+- [GitHub Issues](https://github.com/your-org/polaris-design-library/issues)
+- [Polaris Documentation](https://polaris.shopify.com/)
+- [Polaris Web Components API](https://shopify.dev/docs/api/app-home/polaris-web-components)

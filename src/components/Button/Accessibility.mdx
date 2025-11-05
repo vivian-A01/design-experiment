@@ -1,0 +1,316 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Components/Button/Accessibility" />
+
+# Button Accessibility
+
+The Button component is built with accessibility in mind, following WCAG 2.1 Level AA guidelines and Polaris accessibility standards.
+
+---
+
+## Accessibility Features
+
+### ✅ Keyboard Navigation
+
+All buttons are fully keyboard accessible:
+
+- **Tab**: Move focus to the button
+- **Shift + Tab**: Move focus away from the button
+- **Enter** or **Space**: Activate the button
+
+```tsx
+// All buttons are keyboard accessible by default
+<Button variant="primary">Save Product</Button>
+```
+
+---
+
+### ✅ Screen Reader Support
+
+Buttons provide proper context for screen reader users:
+
+#### Text Buttons
+```tsx
+// Clear, descriptive text is automatically announced
+<Button variant="primary">Add Product</Button>
+// Screen reader announces: "Add Product, button"
+```
+
+#### Icon-Only Buttons
+```tsx
+// ALWAYS provide accessibilityLabel for icon-only buttons
+<Button icon="plus" accessibilityLabel="Add product" />
+// Screen reader announces: "Add product, button"
+```
+
+**❌ Bad Example:**
+```tsx
+// Missing accessibility label - screen reader only announces "button"
+<Button icon="plus" />
+```
+
+**✅ Good Example:**
+```tsx
+// Clear accessibility label provided
+<Button icon="duplicate" accessibilityLabel="Duplicate product" />
+```
+
+---
+
+### ✅ Focus Indicators
+
+Buttons display a visible focus ring when keyboard focused:
+
+- **Default focus**: Blue outline (3px, rgba(1, 113, 233, 0.35))
+- **Critical focus**: Red outline for destructive actions
+- **Focus visible only on keyboard navigation** (not on mouse click)
+
+```tsx
+// Focus indicator is automatic
+<Button variant="primary">Save</Button>
+
+// Critical actions get red focus ring
+<Button variant="primary" tone="critical">Delete</Button>
+```
+
+---
+
+### ✅ Loading States
+
+When buttons are in loading state:
+
+- Button is automatically disabled
+- Screen reader users are notified of loading state
+- Visual spinner indicates processing
+
+```tsx
+<Button loading variant="primary">
+  Saving product...
+</Button>
+// Screen reader announces: "Saving product..., button, busy"
+```
+
+---
+
+### ✅ Disabled State
+
+Disabled buttons:
+
+- Cannot receive focus
+- Are announced as "disabled" by screen readers
+- Have reduced opacity for visual indication
+
+```tsx
+<Button disabled>Save draft</Button>
+// Screen reader announces: "Save draft, button, disabled"
+```
+
+---
+
+## ARIA Attributes
+
+The Button component automatically applies appropriate ARIA attributes:
+
+| State | ARIA Attribute | Value |
+|-------|---------------|-------|
+| Loading | `aria-busy` | `true` |
+| Disabled | `aria-disabled` | `true` |
+| Pressed (toggle) | `aria-pressed` | `true`/`false` |
+
+---
+
+## Color Contrast
+
+All button variants meet WCAG 2.1 Level AA color contrast requirements:
+
+### Primary Button
+- **Background**: #0171E9 (blue)
+- **Text**: #FFFFFF (white)
+- **Contrast ratio**: 4.58:1 ✅ (Passes AA for large text)
+
+### Secondary Button
+- **Background**: #FFFFFF (white)
+- **Border**: #C9CCCF (gray)
+- **Text**: #202223 (dark gray)
+- **Contrast ratio**: 15.8:1 ✅ (Passes AAA)
+
+### Critical Button
+- **Background**: #E01A1A (red)
+- **Text**: #FFFFFF (white)
+- **Contrast ratio**: 5.11:1 ✅ (Passes AA)
+
+---
+
+## Best Practices
+
+### ✅ DO
+
+- **Use clear, action-oriented labels**: "Add Product", "Save Changes", "Delete Item"
+- **Provide accessibility labels for icon-only buttons**: Use `accessibilityLabel` prop
+- **Use appropriate tone for destructive actions**: `tone="critical"` for delete actions
+- **Indicate loading states**: Use `loading` prop during async operations
+- **Use semantic HTML button types**: `type="submit"` for form submissions
+
+### ❌ DON'T
+
+- **Use vague labels**: Avoid "Click here", "Submit", "OK"
+- **Forget accessibility labels on icon buttons**: Always provide `accessibilityLabel`
+- **Nest buttons inside buttons**: Invalid HTML and confusing for screen readers
+- **Use buttons for navigation**: Use `href` prop to make it a link instead
+- **Disable buttons without explanation**: Provide context why a button is disabled
+
+---
+
+## Examples
+
+### Accessible Form Submission
+
+```tsx
+<form onSubmit={handleSubmit}>
+  {/* Form fields */}
+
+  <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
+    <Button variant="secondary" type="button">
+      Cancel
+    </Button>
+    <Button variant="primary" type="submit">
+      Save Product
+    </Button>
+  </div>
+</form>
+```
+
+### Accessible Icon-Only Actions
+
+```tsx
+<div role="toolbar" aria-label="Product actions">
+  <Button
+    icon="duplicate"
+    variant="tertiary"
+    accessibilityLabel="Duplicate product"
+  />
+  <Button
+    icon="view"
+    variant="tertiary"
+    accessibilityLabel="Preview product"
+  />
+  <Button
+    icon="menu-horizontal"
+    variant="tertiary"
+    accessibilityLabel="More actions"
+  />
+</div>
+```
+
+### Accessible Delete Confirmation
+
+```tsx
+<div role="dialog" aria-labelledby="delete-title">
+  <h2 id="delete-title">Delete Product?</h2>
+  <p>This action cannot be undone.</p>
+
+  <div style={{ display: 'flex', gap: '12px' }}>
+    <Button variant="secondary">Cancel</Button>
+    <Button variant="primary" tone="critical">
+      Delete Product
+    </Button>
+  </div>
+</div>
+```
+
+### Accessible Loading State
+
+```tsx
+function SaveButton() {
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleSave = async () => {
+    setIsSaving(true);
+    try {
+      await saveProduct();
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  return (
+    <Button
+      variant="primary"
+      loading={isSaving}
+      onClick={handleSave}
+    >
+      {isSaving ? 'Saving...' : 'Save Product'}
+    </Button>
+  );
+}
+```
+
+---
+
+## Testing Accessibility
+
+### Storybook A11y Panel
+
+Use the Accessibility panel in Storybook to check for issues:
+
+1. Navigate to any Button story
+2. Open the **Accessibility** tab (bottom panel)
+3. Review violations, passes, and incomplete checks
+4. Fix any violations before using in production
+
+### Manual Testing
+
+#### Keyboard Testing
+1. Tab to the button
+2. Press Enter or Space to activate
+3. Verify focus indicator is visible
+4. Verify button performs expected action
+
+#### Screen Reader Testing
+1. Use NVDA (Windows), JAWS (Windows), or VoiceOver (macOS)
+2. Navigate to button with Tab
+3. Verify screen reader announces:
+   - Button text or accessibility label
+   - "Button" role
+   - Current state (disabled, busy, etc.)
+
+#### Visual Testing
+1. Verify sufficient color contrast
+2. Check focus indicator visibility
+3. Verify disabled state is visually clear
+4. Check loading spinner is visible
+
+---
+
+## WCAG 2.1 Compliance
+
+The Button component meets the following WCAG 2.1 Level AA success criteria:
+
+| Criterion | Level | Status |
+|-----------|-------|--------|
+| 1.4.3 Contrast (Minimum) | AA | ✅ Pass |
+| 2.1.1 Keyboard | A | ✅ Pass |
+| 2.1.2 No Keyboard Trap | A | ✅ Pass |
+| 2.4.7 Focus Visible | AA | ✅ Pass |
+| 3.2.4 Consistent Identification | AA | ✅ Pass |
+| 4.1.2 Name, Role, Value | A | ✅ Pass |
+
+---
+
+## Resources
+
+- [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
+- [Polaris Accessibility](https://polaris.shopify.com/foundations/accessibility)
+- [MDN Button Accessibility](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/button_role)
+- [WebAIM Button Accessibility](https://webaim.org/techniques/keyboard/)
+
+---
+
+## Support
+
+If you encounter accessibility issues:
+
+1. Check the Storybook A11y panel for violations
+2. Review this documentation for best practices
+3. Test with keyboard and screen readers
+4. Report issues to the design system team

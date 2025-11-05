@@ -1,0 +1,151 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Introduction" />
+
+# Polaris Design Library
+
+Welcome to the **Polaris Design Library** - a custom design system built on **Shopify Polaris Web Components** with React wrappers.
+
+## What is this?
+
+This library provides React components that wrap [Shopify Polaris Web Components](https://shopify.dev/docs/api/app-home/polaris-web-components), giving you:
+
+- ✅ **Type-safe React components** with full TypeScript support
+- ✅ **Official Polaris design** from Shopify's design system
+- ✅ **Web Components foundation** for maximum compatibility
+- ✅ **Comprehensive documentation** with live examples
+- ✅ **Accessibility built-in** following WCAG standards
+
+## Why use this library?
+
+### 1. React-friendly API
+
+Instead of working directly with web components:
+
+```html
+<!-- Direct web component usage -->
+<s-button variant="primary" id="myButton">Click me</s-button>
+<script>
+  document.getElementById('myButton').addEventListener('click', handler);
+</script>
+```
+
+Use familiar React syntax:
+
+```tsx
+// React component usage
+<Button variant="primary" onClick={handler}>
+  Click me
+</Button>
+```
+
+### 2. TypeScript Support
+
+Get full autocomplete and type checking:
+
+```tsx
+import { Button } from '@your-org/polaris-design-library';
+
+// TypeScript knows all available props
+<Button
+  variant="primary"    // autocomplete: 'auto' | 'primary' | 'secondary' | 'tertiary'
+  tone="critical"      // autocomplete: 'auto' | 'neutral' | 'critical'
+  icon="plus"          // autocomplete: all available icons
+  loading={isLoading}  // type-checked boolean
+  onClick={handleClick}
+>
+  Save Product
+</Button>
+```
+
+### 3. Consistent with Shopify Admin
+
+All components follow Shopify's official design system, ensuring your app looks and feels like native Shopify admin.
+
+## Getting Started
+
+### Installation
+
+```bash
+npm install @your-org/polaris-design-library @shopify/polaris
+```
+
+### Setup
+
+Import Polaris web components in your app entry point:
+
+```tsx
+// In your main.tsx or _app.tsx
+import '@shopify/polaris/build/esm/components';
+```
+
+### Use Components
+
+```tsx
+import { Button } from '@your-org/polaris-design-library';
+
+function MyComponent() {
+  return (
+    <div>
+      <Button variant="primary" onClick={() => console.log('Clicked!')}>
+        Save
+      </Button>
+    </div>
+  );
+}
+```
+
+## Available Components
+
+### Actions
+- **Button** - Triggers actions or navigates to other pages
+
+### Forms
+- Coming soon: TextField, Select, Checkbox, Radio, etc.
+
+### Layout
+- Coming soon: Card, Stack, Layout, etc.
+
+### Feedback Indicators
+- Coming soon: Badge, Spinner, Toast, etc.
+
+## Architecture
+
+### How it works
+
+```
+React Component (Button)
+    ↓
+createWebComponentWrapper utility
+    ↓
+Polaris Web Component (<s-button>)
+    ↓
+Rendered in DOM
+```
+
+The library uses a lightweight wrapper utility that:
+1. Maps React props to web component properties
+2. Converts React events to web component event listeners
+3. Handles ref forwarding
+4. Provides TypeScript types
+
+### Benefits
+
+- **Small bundle size** - Only pay for what you use
+- **Framework agnostic foundation** - Web components work everywhere
+- **Future-proof** - Built on web standards
+- **Official Shopify design** - Always up to date with Polaris
+
+## Contributing
+
+Want to add more components? See the [Component Development Guide](https://github.com/your-org/polaris-design-library/blob/main/COMPONENT_GUIDE.md).
+
+## Resources
+
+- [Shopify Polaris Design System](https://polaris.shopify.com/)
+- [Polaris Web Components API](https://shopify.dev/docs/api/app-home/polaris-web-components)
+- [GitHub Repository](https://github.com/your-org/polaris-design-library)
+
+## Support
+
+Found a bug or have a feature request? [Open an issue](https://github.com/your-org/polaris-design-library/issues).

@@ -1,0 +1,218 @@
+import { Meta } from '@storybook/blocks';
+import { colors, semantic } from '../../tokens/colors';
+
+<Meta title="Design Tokens/Colors" />
+
+# Colors
+
+Polaris color system includes a comprehensive set of color scales and semantic color tokens for consistent UI design.
+
+---
+
+## Color Scales
+
+### Gray Scale
+
+Used for text, borders, and backgrounds throughout the interface.
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: '16px', marginTop: '24px' }}>
+  {Object.entries(colors.gray).map(([shade, value]) => (
+    <div key={shade} style={{ textAlign: 'center' }}>
+      <div style={{
+        width: '100%',
+        height: '80px',
+        backgroundColor: value,
+        border: '1px solid #E3E3E3',
+        borderRadius: '8px',
+        marginBottom: '8px'
+      }} />
+      <div style={{ fontSize: '12px', fontWeight: '600' }}>gray.{shade}</div>
+      <div style={{ fontSize: '11px', color: '#616161', marginTop: '4px' }}>{value}</div>
+    </div>
+  ))}
+</div>
+
+---
+
+### Blue Scale
+
+Primary brand color used for actions, links, and interactive elements.
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: '16px', marginTop: '24px' }}>
+  {Object.entries(colors.blue).map(([shade, value]) => (
+    <div key={shade} style={{ textAlign: 'center' }}>
+      <div style={{
+        width: '100%',
+        height: '80px',
+        backgroundColor: value,
+        border: '1px solid #E3E3E3',
+        borderRadius: '8px',
+        marginBottom: '8px'
+      }} />
+      <div style={{ fontSize: '12px', fontWeight: '600', color: shade >= '600' ? '#fff' : '#000' }}>blue.{shade}</div>
+      <div style={{ fontSize: '11px', color: '#616161', marginTop: '4px' }}>{value}</div>
+    </div>
+  ))}
+</div>
+
+---
+
+### Green Scale
+
+Success states and positive actions.
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: '16px', marginTop: '24px' }}>
+  {Object.entries(colors.green).map(([shade, value]) => (
+    <div key={shade} style={{ textAlign: 'center' }}>
+      <div style={{
+        width: '100%',
+        height: '80px',
+        backgroundColor: value,
+        border: '1px solid #E3E3E3',
+        borderRadius: '8px',
+        marginBottom: '8px'
+      }} />
+      <div style={{ fontSize: '12px', fontWeight: '600', color: shade >= '500' ? '#fff' : '#000' }}>green.{shade}</div>
+      <div style={{ fontSize: '11px', color: '#616161', marginTop: '4px' }}>{value}</div>
+    </div>
+  ))}
+</div>
+
+---
+
+### Yellow Scale
+
+Warning and caution states.
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: '16px', marginTop: '24px' }}>
+  {Object.entries(colors.yellow).map(([shade, value]) => (
+    <div key={shade} style={{ textAlign: 'center' }}>
+      <div style={{
+        width: '100%',
+        height: '80px',
+        backgroundColor: value,
+        border: '1px solid #E3E3E3',
+        borderRadius: '8px',
+        marginBottom: '8px'
+      }} />
+      <div style={{ fontSize: '12px', fontWeight: '600', color: shade >= '800' ? '#fff' : '#000' }}>yellow.{shade}</div>
+      <div style={{ fontSize: '11px', color: '#616161', marginTop: '4px' }}>{value}</div>
+    </div>
+  ))}
+</div>
+
+---
+
+### Red Scale
+
+Critical states and error messages.
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: '16px', marginTop: '24px' }}>
+  {Object.entries(colors.red).map(([shade, value]) => (
+    <div key={shade} style={{ textAlign: 'center' }}>
+      <div style={{
+        width: '100%',
+        height: '80px',
+        backgroundColor: value,
+        border: '1px solid #E3E3E3',
+        borderRadius: '8px',
+        marginBottom: '8px'
+      }} />
+      <div style={{ fontSize: '12px', fontWeight: '600', color: shade >= '500' ? '#fff' : '#000' }}>red.{shade}</div>
+      <div style={{ fontSize: '11px', color: '#616161', marginTop: '4px' }}>{value}</div>
+    </div>
+  ))}
+</div>
+
+---
+
+### Purple Scale
+
+Magic and special features.
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: '16px', marginTop: '24px' }}>
+  {Object.entries(colors.purple).map(([shade, value]) => (
+    <div key={shade} style={{ textAlign: 'center' }}>
+      <div style={{
+        width: '100%',
+        height: '80px',
+        backgroundColor: value,
+        border: '1px solid #E3E3E3',
+        borderRadius: '8px',
+        marginBottom: '8px'
+      }} />
+      <div style={{ fontSize: '12px', fontWeight: '600', color: shade >= '500' ? '#fff' : '#000' }}>purple.{shade}</div>
+      <div style={{ fontSize: '11px', color: '#616161', marginTop: '4px' }}>{value}</div>
+    </div>
+  ))}
+</div>
+
+---
+
+## Semantic Colors
+
+Semantic color tokens for common use cases. Use these for consistent theming.
+
+### Text Colors
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '16px', marginTop: '24px' }}>
+  <div style={{ padding: '16px', backgroundColor: '#fff', border: '1px solid #E3E3E3', borderRadius: '8px' }}>
+    <div style={{ color: semantic.textPrimary, fontSize: '14px', fontWeight: '600', marginBottom: '8px' }}>Primary Text</div>
+    <div style={{ fontSize: '12px', color: '#616161' }}>semantic.textPrimary</div>
+    <div style={{ fontSize: '11px', color: '#8C9196', marginTop: '4px' }}>{semantic.textPrimary}</div>
+  </div>
+  <div style={{ padding: '16px', backgroundColor: '#fff', border: '1px solid #E3E3E3', borderRadius: '8px' }}>
+    <div style={{ color: semantic.textSecondary, fontSize: '14px', fontWeight: '600', marginBottom: '8px' }}>Secondary Text</div>
+    <div style={{ fontSize: '12px', color: '#616161' }}>semantic.textSecondary</div>
+    <div style={{ fontSize: '11px', color: '#8C9196', marginTop: '4px' }}>{semantic.textSecondary}</div>
+  </div>
+  <div style={{ padding: '16px', backgroundColor: '#fff', border: '1px solid #E3E3E3', borderRadius: '8px' }}>
+    <div style={{ color: semantic.textDisabled, fontSize: '14px', fontWeight: '600', marginBottom: '8px' }}>Disabled Text</div>
+    <div style={{ fontSize: '12px', color: '#616161' }}>semantic.textDisabled</div>
+    <div style={{ fontSize: '11px', color: '#8C9196', marginTop: '4px' }}>{semantic.textDisabled}</div>
+  </div>
+</div>
+
+### Status Colors
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '16px', marginTop: '24px' }}>
+  <div style={{ padding: '16px', backgroundColor: '#fff', border: '1px solid #E3E3E3', borderRadius: '8px' }}>
+    <div style={{ color: semantic.textSuccess, fontSize: '14px', fontWeight: '600', marginBottom: '8px' }}>Success Text</div>
+    <div style={{ fontSize: '12px', color: '#616161' }}>semantic.textSuccess</div>
+    <div style={{ fontSize: '11px', color: '#8C9196', marginTop: '4px' }}>{semantic.textSuccess}</div>
+  </div>
+  <div style={{ padding: '16px', backgroundColor: '#fff', border: '1px solid #E3E3E3', borderRadius: '8px' }}>
+    <div style={{ color: semantic.textWarning, fontSize: '14px', fontWeight: '600', marginBottom: '8px' }}>Warning Text</div>
+    <div style={{ fontSize: '12px', color: '#616161' }}>semantic.textWarning</div>
+    <div style={{ fontSize: '11px', color: '#8C9196', marginTop: '4px' }}>{semantic.textWarning}</div>
+  </div>
+  <div style={{ padding: '16px', backgroundColor: '#fff', border: '1px solid #E3E3E3', borderRadius: '8px' }}>
+    <div style={{ color: semantic.textCritical, fontSize: '14px', fontWeight: '600', marginBottom: '8px' }}>Critical Text</div>
+    <div style={{ fontSize: '12px', color: '#616161' }}>semantic.textCritical</div>
+    <div style={{ fontSize: '11px', color: '#8C9196', marginTop: '4px' }}>{semantic.textCritical}</div>
+  </div>
+  <div style={{ padding: '16px', backgroundColor: '#fff', border: '1px solid #E3E3E3', borderRadius: '8px' }}>
+    <div style={{ color: semantic.textInfo, fontSize: '14px', fontWeight: '600', marginBottom: '8px' }}>Info Text</div>
+    <div style={{ fontSize: '12px', color: '#616161' }}>semantic.textInfo</div>
+    <div style={{ fontSize: '11px', color: '#8C9196', marginTop: '4px' }}>{semantic.textInfo}</div>
+  </div>
+</div>
+
+---
+
+## Usage
+
+```tsx
+import { colors, semantic } from '@your-org/polaris-design-library/tokens';
+
+// Use color scale
+const primaryButton = {
+  backgroundColor: colors.blue[500],
+  color: colors.gray[50],
+};
+
+// Use semantic colors
+const errorText = {
+  color: semantic.textCritical,
+};
+```
