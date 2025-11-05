@@ -1,0 +1,50 @@
+import{j as e}from"./jsx-runtime-DiklIkkE.js";import{useMDXComponents as x}from"./index-ChEI-nsM.js";import{M as g}from"./index-gaPx6oo5.js";import"./index-DRjF_FHU.js";import"./iframe-ClZulfIc.js";import"./index-DHHUZ-3A.js";import"./index-D-Mha1DF.js";import"./index-DrFu-skq.js";const l={50:"#FFFFFF",100:"#F7F7F7",200:"#EBEBEB",300:"#E3E3E3",400:"#C9CCCF",500:"#8C9196",600:"#616161",700:"#303030",800:"#1A1A1A",900:"#000000"},c={50:"#F4F6F8",100:"#E3F0FF",200:"#B7D8FF",300:"#7AB8FF",400:"#4C9AFF",500:"#0171E9",600:"#005BBB",700:"#004488",800:"#002E5D",900:"#001933"},p={50:"#F1F8F5",100:"#D4F0E1",200:"#A6DFC4",300:"#73C5A2",400:"#47A881",500:"#11837C",600:"#0F6F61",700:"#0C5548",800:"#093930",900:"#05201C"},a={50:"#FFFEF7",100:"#FFF9E0",200:"#FFF4C4",300:"#FFEF9D",400:"#FFE56B",500:"#FFD423",600:"#E5B800",700:"#B38F00",800:"#806600",900:"#4D3D00"},m={50:"#FFF5F5",100:"#FFEBEB",200:"#FFD6D6",300:"#FFB8B8",400:"#FF9494",500:"#E01A1A",600:"#C21414",700:"#940F0F",800:"#660A0A",900:"#380505"},h={50:"#F9F7FA",100:"#F2EDFF",200:"#E3D5FF",300:"#C9B3FF",400:"#B08AFF",500:"#8151FF",600:"#6B3FCC",700:"#532E99",800:"#3B1F66",900:"#221133"},t={textPrimary:l[900],textSecondary:l[700],textDisabled:l[500],textCritical:m[600],textWarning:a[700],textSuccess:p[600],textInfo:c[600]},s={gray:l,blue:c,green:p,yellow:a,red:m,purple:h};function d(n){const i={code:"code",div:"div",h1:"h1",h2:"h2",h3:"h3",hr:"hr",p:"p",pre:"pre",...x(),...n.components};return e.jsxs(e.Fragment,{children:[e.jsx(g,{title:"Design Tokens/Colors"}),`
+`,e.jsx(i.h1,{id:"colors",children:"Colors"}),`
+`,e.jsx(i.p,{children:"Polaris color system includes a comprehensive set of color scales and semantic color tokens for consistent UI design."}),`
+`,e.jsx(i.hr,{}),`
+`,e.jsx(i.h2,{id:"color-scales",children:"Color Scales"}),`
+`,e.jsx(i.h3,{id:"gray-scale",children:"Gray Scale"}),`
+`,e.jsx(i.p,{children:"Used for text, borders, and backgrounds throughout the interface."}),`
+`,e.jsx("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(120px, 1fr))",gap:"16px",marginTop:"24px"},children:Object.entries(s.gray).map(([r,o])=>e.jsxs(i.div,{style:{textAlign:"center"},children:[e.jsx(i.div,{style:{width:"100%",height:"80px",backgroundColor:o,border:"1px solid #E3E3E3",borderRadius:"8px",marginBottom:"8px"}}),e.jsxs(i.div,{style:{fontSize:"12px",fontWeight:"600"},children:["gray.",r]}),e.jsx(i.div,{style:{fontSize:"11px",color:"#616161",marginTop:"4px"},children:o})]},r))}),`
+`,e.jsx(i.hr,{}),`
+`,e.jsx(i.h3,{id:"blue-scale",children:"Blue Scale"}),`
+`,e.jsx(i.p,{children:"Primary brand color used for actions, links, and interactive elements."}),`
+`,e.jsx("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(120px, 1fr))",gap:"16px",marginTop:"24px"},children:Object.entries(s.blue).map(([r,o])=>e.jsxs(i.div,{style:{textAlign:"center"},children:[e.jsx(i.div,{style:{width:"100%",height:"80px",backgroundColor:o,border:"1px solid #E3E3E3",borderRadius:"8px",marginBottom:"8px"}}),e.jsxs(i.div,{style:{fontSize:"12px",fontWeight:"600",color:r>="600"?"#fff":"#000"},children:["blue.",r]}),e.jsx(i.div,{style:{fontSize:"11px",color:"#616161",marginTop:"4px"},children:o})]},r))}),`
+`,e.jsx(i.hr,{}),`
+`,e.jsx(i.h3,{id:"green-scale",children:"Green Scale"}),`
+`,e.jsx(i.p,{children:"Success states and positive actions."}),`
+`,e.jsx("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(120px, 1fr))",gap:"16px",marginTop:"24px"},children:Object.entries(s.green).map(([r,o])=>e.jsxs(i.div,{style:{textAlign:"center"},children:[e.jsx(i.div,{style:{width:"100%",height:"80px",backgroundColor:o,border:"1px solid #E3E3E3",borderRadius:"8px",marginBottom:"8px"}}),e.jsxs(i.div,{style:{fontSize:"12px",fontWeight:"600",color:r>="500"?"#fff":"#000"},children:["green.",r]}),e.jsx(i.div,{style:{fontSize:"11px",color:"#616161",marginTop:"4px"},children:o})]},r))}),`
+`,e.jsx(i.hr,{}),`
+`,e.jsx(i.h3,{id:"yellow-scale",children:"Yellow Scale"}),`
+`,e.jsx(i.p,{children:"Warning and caution states."}),`
+`,e.jsx("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(120px, 1fr))",gap:"16px",marginTop:"24px"},children:Object.entries(s.yellow).map(([r,o])=>e.jsxs(i.div,{style:{textAlign:"center"},children:[e.jsx(i.div,{style:{width:"100%",height:"80px",backgroundColor:o,border:"1px solid #E3E3E3",borderRadius:"8px",marginBottom:"8px"}}),e.jsxs(i.div,{style:{fontSize:"12px",fontWeight:"600",color:r>="800"?"#fff":"#000"},children:["yellow.",r]}),e.jsx(i.div,{style:{fontSize:"11px",color:"#616161",marginTop:"4px"},children:o})]},r))}),`
+`,e.jsx(i.hr,{}),`
+`,e.jsx(i.h3,{id:"red-scale",children:"Red Scale"}),`
+`,e.jsx(i.p,{children:"Critical states and error messages."}),`
+`,e.jsx("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(120px, 1fr))",gap:"16px",marginTop:"24px"},children:Object.entries(s.red).map(([r,o])=>e.jsxs(i.div,{style:{textAlign:"center"},children:[e.jsx(i.div,{style:{width:"100%",height:"80px",backgroundColor:o,border:"1px solid #E3E3E3",borderRadius:"8px",marginBottom:"8px"}}),e.jsxs(i.div,{style:{fontSize:"12px",fontWeight:"600",color:r>="500"?"#fff":"#000"},children:["red.",r]}),e.jsx(i.div,{style:{fontSize:"11px",color:"#616161",marginTop:"4px"},children:o})]},r))}),`
+`,e.jsx(i.hr,{}),`
+`,e.jsx(i.h3,{id:"purple-scale",children:"Purple Scale"}),`
+`,e.jsx(i.p,{children:"Magic and special features."}),`
+`,e.jsx("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(120px, 1fr))",gap:"16px",marginTop:"24px"},children:Object.entries(s.purple).map(([r,o])=>e.jsxs(i.div,{style:{textAlign:"center"},children:[e.jsx(i.div,{style:{width:"100%",height:"80px",backgroundColor:o,border:"1px solid #E3E3E3",borderRadius:"8px",marginBottom:"8px"}}),e.jsxs(i.div,{style:{fontSize:"12px",fontWeight:"600",color:r>="500"?"#fff":"#000"},children:["purple.",r]}),e.jsx(i.div,{style:{fontSize:"11px",color:"#616161",marginTop:"4px"},children:o})]},r))}),`
+`,e.jsx(i.hr,{}),`
+`,e.jsx(i.h2,{id:"semantic-colors",children:"Semantic Colors"}),`
+`,e.jsx(i.p,{children:"Semantic color tokens for common use cases. Use these for consistent theming."}),`
+`,e.jsx(i.h3,{id:"text-colors",children:"Text Colors"}),`
+`,e.jsxs("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(200px, 1fr))",gap:"16px",marginTop:"24px"},children:[e.jsxs("div",{style:{padding:"16px",backgroundColor:"#fff",border:"1px solid #E3E3E3",borderRadius:"8px"},children:[e.jsx("div",{style:{color:t.textPrimary,fontSize:"14px",fontWeight:"600",marginBottom:"8px"},children:"Primary Text"}),e.jsx("div",{style:{fontSize:"12px",color:"#616161"},children:"semantic.textPrimary"}),e.jsx("div",{style:{fontSize:"11px",color:"#8C9196",marginTop:"4px"},children:t.textPrimary})]}),e.jsxs("div",{style:{padding:"16px",backgroundColor:"#fff",border:"1px solid #E3E3E3",borderRadius:"8px"},children:[e.jsx("div",{style:{color:t.textSecondary,fontSize:"14px",fontWeight:"600",marginBottom:"8px"},children:"Secondary Text"}),e.jsx("div",{style:{fontSize:"12px",color:"#616161"},children:"semantic.textSecondary"}),e.jsx("div",{style:{fontSize:"11px",color:"#8C9196",marginTop:"4px"},children:t.textSecondary})]}),e.jsxs("div",{style:{padding:"16px",backgroundColor:"#fff",border:"1px solid #E3E3E3",borderRadius:"8px"},children:[e.jsx("div",{style:{color:t.textDisabled,fontSize:"14px",fontWeight:"600",marginBottom:"8px"},children:"Disabled Text"}),e.jsx("div",{style:{fontSize:"12px",color:"#616161"},children:"semantic.textDisabled"}),e.jsx("div",{style:{fontSize:"11px",color:"#8C9196",marginTop:"4px"},children:t.textDisabled})]})]}),`
+`,e.jsx(i.h3,{id:"status-colors",children:"Status Colors"}),`
+`,e.jsxs("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(200px, 1fr))",gap:"16px",marginTop:"24px"},children:[e.jsxs("div",{style:{padding:"16px",backgroundColor:"#fff",border:"1px solid #E3E3E3",borderRadius:"8px"},children:[e.jsx("div",{style:{color:t.textSuccess,fontSize:"14px",fontWeight:"600",marginBottom:"8px"},children:"Success Text"}),e.jsx("div",{style:{fontSize:"12px",color:"#616161"},children:"semantic.textSuccess"}),e.jsx("div",{style:{fontSize:"11px",color:"#8C9196",marginTop:"4px"},children:t.textSuccess})]}),e.jsxs("div",{style:{padding:"16px",backgroundColor:"#fff",border:"1px solid #E3E3E3",borderRadius:"8px"},children:[e.jsx("div",{style:{color:t.textWarning,fontSize:"14px",fontWeight:"600",marginBottom:"8px"},children:"Warning Text"}),e.jsx("div",{style:{fontSize:"12px",color:"#616161"},children:"semantic.textWarning"}),e.jsx("div",{style:{fontSize:"11px",color:"#8C9196",marginTop:"4px"},children:t.textWarning})]}),e.jsxs("div",{style:{padding:"16px",backgroundColor:"#fff",border:"1px solid #E3E3E3",borderRadius:"8px"},children:[e.jsx("div",{style:{color:t.textCritical,fontSize:"14px",fontWeight:"600",marginBottom:"8px"},children:"Critical Text"}),e.jsx("div",{style:{fontSize:"12px",color:"#616161"},children:"semantic.textCritical"}),e.jsx("div",{style:{fontSize:"11px",color:"#8C9196",marginTop:"4px"},children:t.textCritical})]}),e.jsxs("div",{style:{padding:"16px",backgroundColor:"#fff",border:"1px solid #E3E3E3",borderRadius:"8px"},children:[e.jsx("div",{style:{color:t.textInfo,fontSize:"14px",fontWeight:"600",marginBottom:"8px"},children:"Info Text"}),e.jsx("div",{style:{fontSize:"12px",color:"#616161"},children:"semantic.textInfo"}),e.jsx("div",{style:{fontSize:"11px",color:"#8C9196",marginTop:"4px"},children:t.textInfo})]})]}),`
+`,e.jsx(i.hr,{}),`
+`,e.jsx(i.h2,{id:"usage",children:"Usage"}),`
+`,e.jsx(i.pre,{children:e.jsx(i.code,{className:"language-tsx",children:`import { colors, semantic } from '@your-org/polaris-design-library/tokens';
+
+// Use color scale
+const primaryButton = {
+  backgroundColor: colors.blue[500],
+  color: colors.gray[50],
+};
+
+// Use semantic colors
+const errorText = {
+  color: semantic.textCritical,
+};
+`})})]})}function v(n={}){const{wrapper:i}={...x(),...n.components};return i?e.jsx(i,{...n,children:e.jsx(d,{...n})}):d(n)}export{v as default};

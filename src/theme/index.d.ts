@@ -1,0 +1,147 @@
+/**
+ * Unified Theme System
+ *
+ * Imports all parsed design tokens and provides helpers for applying them
+ * as CSS custom properties. Works with both React components and Web Components.
+ */
+/**
+ * Unified theme object containing all design tokens
+ */
+export declare const theme: {
+    readonly colors: {
+        readonly 'color-gray-50': string;
+        readonly 'color-gray-100': string;
+        readonly 'color-gray-300': string;
+        readonly 'color-gray-500': string;
+        readonly 'color-gray-700': string;
+        readonly 'color-gray-900': string;
+        readonly 'color-blue-100': string;
+        readonly 'color-blue-500': string;
+        readonly 'color-blue-700': string;
+        readonly 'color-green-100': string;
+        readonly 'color-green-500': string;
+        readonly 'color-green-700': string;
+        readonly 'color-red-100': string;
+        readonly 'color-red-500': string;
+        readonly 'color-red-700': string;
+        readonly 'color-yellow-100': string;
+        readonly 'color-yellow-300': string;
+        readonly 'color-yellow-500': string;
+        readonly 'color-bg-primary': string;
+        readonly 'color-bg-subdued': string;
+        readonly 'color-border': string;
+        readonly 'color-text-primary': string;
+        readonly 'color-text-secondary': string;
+        readonly 'color-text-disabled': string;
+        readonly 'color-text-interactive': string;
+        readonly 'color-text-success': string;
+        readonly 'color-text-critical': string;
+        readonly 'color-text-warning': string;
+    };
+    readonly typography: {
+        readonly 'font-family-sans': string;
+        readonly 'font-family-mono': string;
+        readonly 'font-size-xs': string;
+        readonly 'font-size-sm': string;
+        readonly 'font-size-base': string;
+        readonly 'font-size-lg': string;
+        readonly 'font-size-xl': string;
+        readonly 'font-size-2xl': string;
+        readonly 'font-size-3xl': string;
+        readonly 'font-weight-regular': string;
+        readonly 'font-weight-medium': string;
+        readonly 'font-weight-semibold': string;
+        readonly 'font-weight-bold': string;
+        readonly 'line-height-tight': string;
+        readonly 'line-height-normal': string;
+        readonly 'line-height-relaxed': string;
+        readonly 'line-height-loose': string;
+        readonly 'font-heading-xl': {
+            fontFamily: string;
+            fontSize: string;
+            fontWeight: string;
+            lineHeight: string;
+        };
+        readonly 'font-heading-lg': {
+            fontFamily: string;
+            fontSize: string;
+            fontWeight: string;
+            lineHeight: string;
+        };
+        readonly 'font-heading-md': {
+            fontFamily: string;
+            fontSize: string;
+            fontWeight: string;
+            lineHeight: string;
+        };
+        readonly 'font-heading-sm': {
+            fontFamily: string;
+            fontSize: string;
+            fontWeight: string;
+            lineHeight: string;
+        };
+        readonly 'font-body-lg': {
+            fontFamily: string;
+            fontSize: string;
+            fontWeight: string;
+            lineHeight: string;
+        };
+        readonly 'font-body-md': {
+            fontFamily: string;
+            fontSize: string;
+            fontWeight: string;
+            lineHeight: string;
+        };
+        readonly 'font-body-sm': {
+            fontFamily: string;
+            fontSize: string;
+            fontWeight: string;
+            lineHeight: string;
+        };
+        readonly 'font-caption': {
+            fontFamily: string;
+            fontSize: string;
+            fontWeight: string;
+            lineHeight: string;
+        };
+    };
+    readonly shadows: {
+        readonly 'shadow-none': string;
+        readonly 'shadow-xs': string;
+        readonly 'shadow-sm': string;
+        readonly 'shadow-md': string;
+        readonly 'shadow-lg': string;
+        readonly 'shadow-button-default': string;
+        readonly 'shadow-card': string;
+        readonly 'shadow-card-hovered': string;
+        readonly 'shadow-popover': string;
+        readonly 'shadow-modal': string;
+        readonly 'shadow-focus': string;
+        readonly 'shadow-focus-critical': string;
+    };
+};
+/**
+ * Apply theme tokens as CSS custom properties to :root
+ * This makes tokens available globally as CSS variables
+ *
+ * @param theme - Theme object containing colors, typography, and shadows
+ * @example
+ * ```tsx
+ * import { applyTheme, theme } from './theme';
+ * applyTheme(theme);
+ * // Now use: var(--color-text-primary) in CSS
+ * ```
+ */
+export declare function applyTheme(themeObj: typeof theme): void;
+/**
+ * Remove theme CSS custom properties from :root
+ * Useful for cleanup or theme switching
+ */
+export declare function removeTheme(themeObj: typeof theme): void;
+/**
+ * Get all CSS custom property names generated by the theme
+ * Useful for debugging or documentation
+ */
+export declare function getThemeVariableNames(themeObj: typeof theme): string[];
+export default theme;
+//# sourceMappingURL=index.d.ts.map

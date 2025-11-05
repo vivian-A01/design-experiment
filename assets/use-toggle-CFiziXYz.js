@@ -1,0 +1,1 @@
+import{r as e}from"./index-DRjF_FHU.js";function r(a){const[s,t]=e.useState(a);return{value:s,toggle:e.useCallback(()=>t(l=>!l),[]),setTrue:e.useCallback(()=>t(!0),[]),setFalse:e.useCallback(()=>t(!1),[])}}export{r as u};

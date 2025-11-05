@@ -1,0 +1,1 @@
+import{R as n}from"./index-DRjF_FHU.js";import{c as i,v as o}from"./css-CpB8MaEn.js";var e={TextContainer:"Polaris-TextContainer",spacingTight:"Polaris-TextContainer--spacingTight",spacingLoose:"Polaris-TextContainer--spacingLoose"};function m({spacing:a,children:t}){const s=i(e.TextContainer,a&&e[o("spacing",a)]);return n.createElement("div",{className:s},t)}export{m as T};
